@@ -121,6 +121,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuanLyChamCongController.cs" />
+    <Compile Include="Controllers\QuanLyHeThongController.cs" />
+    <Compile Include="Controllers\QuanLyHoSoController.cs" />
+    <Compile Include="Controllers\QuanLyThuong_PhucLoiController.cs" />
+    <Compile Include="Controllers\QuanLyTuyenDungController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,6 +167,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\QuanLyTuyenDung\QuanLyTuyenDung.cshtml" />
+    <Content Include="Views\QuanLyHoSo\QuanLyHoSo.cshtml" />
+    <Content Include="Views\QuanLyChamCong\QuanLyChamCong.cshtml" />
+    <Content Include="Views\QuanLyThuong_PhucLoi\QuanLyThuong_PhucLoi.cshtml" />
+    <Content Include="Views\QuanLyHeThong\QuanLyHeThong.cshtml" />
+    <Content Include="Views\QuanLyHoSo\CapNhatSoYeuLyLich.cshtml" />
+    <Content Include="Views\QuanLyHoSo\ChuyenViTriCongViec.cshtml" />
+    <Content Include="Views\QuanLyHoSo\QuanLyHopDongLaoDong.cshtml" />
+    <Content Include="Views\QuanLyHoSo\QuanLyChungChi.cshtml" />
+    <Content Include="Views\QuanLyHoSo\QuanLyKhenThuong.cshtml" />
+    <Content Include="Views\QuanLyHoSo\BaoCaoNhanSu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

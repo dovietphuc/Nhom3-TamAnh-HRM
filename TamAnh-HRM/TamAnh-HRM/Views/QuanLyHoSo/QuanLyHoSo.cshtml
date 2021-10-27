@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Quản lý hồ sơ";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="navbar">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Cập nhật sơ yếu lý lịch", "CapNhatSoYeuLyLich", "QuanLyHoSo")</li>
+        <li>@Html.ActionLink("Chuyển vị trí công việc", "ChuyenViTriCongViec", "QuanLyHoSo")</li>
+        <li>@Html.ActionLink("Quản lý hợp đồng lao động", "QuanLyHopDongLaoDong", "QuanLyHoSo")</li>
+        <li>@Html.ActionLink("Quản lý chứng chỉ", "QuanLyChungChi", "QuanLyHoSo")</li>
+        <li>@Html.ActionLink("Quản lý khen thưởng", "QuanLyKhenThuong", "QuanLyHoSo")</li>
+        <li>@Html.ActionLink("Báo cáo nhân sự", "BaoCaoNhanSu", "QuanLyHoSo")</li>
+    </ul>
+</div>
