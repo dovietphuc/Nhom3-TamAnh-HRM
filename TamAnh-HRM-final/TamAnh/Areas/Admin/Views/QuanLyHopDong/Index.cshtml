@@ -1,0 +1,88 @@
+﻿@model IEnumerable<StudentManager.Areas.Admin.Models.HopDong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading"><strong>Quản lý hợp đồng</strong></div>
+        <div class="panel-body">
+            <p class="text-right">
+                <a href="@Url.Action("Create", "QuanLyHopDong")" class="btn btn-sm btn-success"> Thêm mới <i class="glyphicon glyphicon-plus"></i></a>
+            </p>
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.iSoHopDong)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dNgayKy)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dNgayCoHieuLuc)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dNgayHetHan)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.iLuongCoBan)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.iLuongDongBH)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sGhiChu)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTepDinhKem)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.iMaNhanVien)
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.iSoHopDong)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.dNgayKy)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.dNgayCoHieuLuc)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.dNgayHetHan)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.iLuongCoBan)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.iLuongDongBH)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sGhiChu)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sTepDinhKem)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.iMaNhanVien)
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "QuanLyHopDong", new { id = item.ID })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="@Url.Action("Delete", "QuanLyHopDong", new { id = item.ID })" class="btn btn-sm btn-danger delete"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

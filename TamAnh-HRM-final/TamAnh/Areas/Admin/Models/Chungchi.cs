@@ -72,7 +72,7 @@ namespace StudentManager.Areas.Admin.Models
             cmd.Parameters.AddWithValue("@tenchungchi", cc.sTenchungchi);
             cmd.Parameters.AddWithValue("@ngaybatdau", cc.dNgaybatdau);
             cmd.Parameters.AddWithValue("@ngayketthuc", cc.dNgayketthuc);
-            cmd.Parameters.AddWithValue("@link", cc.sLinkdinhkem);
+            cmd.Parameters.AddWithValue("@link", cc.sLinkdinhkem != null ? cc.sLinkdinhkem : "");
             con.Open();
             cmd.ExecuteNonQuery();
             cmd.Dispose();
@@ -91,7 +91,7 @@ namespace StudentManager.Areas.Admin.Models
                 cmd.Parameters.AddWithValue("@tenchungchi", cc.sTenchungchi);
                 cmd.Parameters.AddWithValue("@ngaybatdau", cc.dNgaybatdau);
                 cmd.Parameters.AddWithValue("@ngayketthuc", cc.dNgayketthuc);
-                cmd.Parameters.AddWithValue("@link", cc.sLinkdinhkem);
+                cmd.Parameters.AddWithValue("@link", cc.sLinkdinhkem != null ? cc.sLinkdinhkem : "");
                 con.Open();
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
