@@ -18,15 +18,15 @@ namespace StudentManager.Areas.Admin.Models
 
         [Required(ErrorMessage = "Ngày ký không được để trống")]
         [Display(Name = "Ngày ký")]
-        public string dNgayKy { set; get; }
+        public DateTime dNgayKy { set; get; }
 
         [Required(ErrorMessage = "Ngày có hiệu lực không được để trống")]
         [Display(Name = "Ngày có hiệu lực")]
-        public string dNgayCoHieuLuc { get; set; }
+        public DateTime dNgayCoHieuLuc { get; set; }
 
         [Required(ErrorMessage = "Ngày hết hạn không được để trống")]
         [Display(Name = "Ngày hết hạn")]
-        public string dNgayHetHan { get; set; }
+        public DateTime dNgayHetHan { get; set; }
 
         [Required(ErrorMessage = "Lương cơ bản không được để trống")]
         [Display(Name = "Lương cơ bản")]
@@ -37,14 +37,17 @@ namespace StudentManager.Areas.Admin.Models
         public int iLuongDongBH { get; set; }
 
         [Display(Name = "Ghi chú")]
-        public string sGhiChu { get; set; }
+        public string sGhiChu { get; set; } = "";
 
         [Display(Name = "Đường dẫn tệp đính kèm")]
-        public string sTepDinhKem { get; set; }
+        public string sTepDinhKem { get; set; } = "";
 
         [Required(ErrorMessage = "Mã nhân viên không được để trống")]
         [Display(Name = "Mã nhân viên")]
         public int iMaNhanVien { get; set; }
+
+        [Display(Name = "Tên nhân viên")]
+        public string sTenNhanVien { get; set; }
     }
 
     public class ListHopDong
@@ -60,9 +63,9 @@ namespace StudentManager.Areas.Admin.Models
         {
             String sql;
             if (ID == 0)
-                sql = "SELECT * FROM tblhopdonglaodong";
+                sql = "SELECT * FROM tblhopdonglaodong JOIN tblnhanvien ON tblhopdonglaodong.FK_NhanVien_iIDNhanVien = tblnhanvien.PK_iIdNhanVien";
             else
-                sql = "SELECT * FROM tblhopdonglaodong WHERE PK_HDLD_iMaHD = " + ID;
+                sql = "SELECT * FROM tblhopdonglaodong JOIN tblnhanvien ON tblhopdonglaodong.FK_NhanVien_iIDNhanVien = tblnhanvien.PK_iIdNhanVien WHERE PK_HDLD_iMaHD = " + ID;
 
             List<HopDong> listHopDong = new List<HopDong>();
 
@@ -79,14 +82,15 @@ namespace StudentManager.Areas.Admin.Models
                 hopDong = new HopDong();
                 hopDong.ID = Convert.ToInt32(dt.Rows[i]["PK_HDLD_iMaHD"].ToString());
                 hopDong.iSoHopDong = Convert.ToInt32(dt.Rows[i]["HDLD_iSoHopDong"].ToString());
-                hopDong.dNgayKy = dt.Rows[i]["HDLD_dNgayKy"].ToString();
-                hopDong.dNgayCoHieuLuc = dt.Rows[i]["HDLD_dNgayCoHieuLuc"].ToString();
-                hopDong.dNgayHetHan = dt.Rows[i]["HDLD_dNgayHetHan"].ToString();
+                hopDong.dNgayKy = (DateTime)dt.Rows[i]["HDLD_dNgayKy"];
+                hopDong.dNgayCoHieuLuc = (DateTime)dt.Rows[i]["HDLD_dNgayCoHieuLuc"];
+                hopDong.dNgayHetHan = (DateTime)dt.Rows[i]["HDLD_dNgayHetHan"];
                 hopDong.iLuongCoBan = Convert.ToInt32(dt.Rows[i]["HDLD_iLuongCoBan"].ToString());
                 hopDong.iLuongDongBH = Convert.ToInt32(dt.Rows[i]["HDLD_iLuongDongBH"].ToString());
                 hopDong.sGhiChu = dt.Rows[i]["HDLD_sGhiChu"].ToString();
                 hopDong.sTepDinhKem = dt.Rows[i]["HDLD_sTepDinhKem"].ToString();
                 hopDong.iMaNhanVien = Convert.ToInt32(dt.Rows[i]["FK_NhanVien_iIDNhanVien"].ToString());
+                hopDong.sTenNhanVien = dt.Rows[i]["NhanVien_sHoVaTen"].ToString();
 
                 listHopDong.Add(hopDong);
             }
@@ -125,14 +129,14 @@ namespace StudentManager.Areas.Admin.Models
             cmd.Parameters.AddWithValue("@NgayHetHan", hopDong.dNgayHetHan);
             cmd.Parameters.AddWithValue("@LuongCoBan", hopDong.iLuongCoBan);
             cmd.Parameters.AddWithValue("@LuongDongBH", hopDong.iLuongDongBH);
-            cmd.Parameters.AddWithValue("@GhiChu", hopDong.sGhiChu != null ? hopDong.sGhiChu : "");
-            cmd.Parameters.AddWithValue("@TepDinhKem", hopDong.sTepDinhKem != null ? hopDong.sTepDinhKem : "");
+            cmd.Parameters.AddWithValue("@GhiChu", hopDong.sGhiChu);
+            cmd.Parameters.AddWithValue("@TepDinhKem", hopDong.sTepDinhKem);
             cmd.Parameters.AddWithValue("@IDNhanVien", hopDong.iMaNhanVien);
             con.Open();
             int i = cmd.ExecuteNonQuery();
             con.Close();
             
-            return i == 1;
+            return i > 0;
         }
 
         public bool update(HopDong hopDong)
@@ -159,13 +163,13 @@ namespace StudentManager.Areas.Admin.Models
                 cmd.Parameters.AddWithValue("@dNgayHetHan", hopDong.dNgayHetHan);
                 cmd.Parameters.AddWithValue("@iLuongCoBan", hopDong.iLuongCoBan);
                 cmd.Parameters.AddWithValue("@iLuongDongBH", hopDong.iLuongDongBH);
-                cmd.Parameters.AddWithValue("@sGhiChu", hopDong.sGhiChu != null ? hopDong.sGhiChu : "");
-                cmd.Parameters.AddWithValue("@sTepDinhKem", hopDong.sTepDinhKem != null ? hopDong.sTepDinhKem : "");
+                cmd.Parameters.AddWithValue("@sGhiChu", hopDong.sGhiChu);
+                cmd.Parameters.AddWithValue("@sTepDinhKem", hopDong.sTepDinhKem);
                 cmd.Parameters.AddWithValue("@iIDNhanVien", hopDong.iMaNhanVien);
                 cmd.Parameters.AddWithValue("@id", hopDong.ID);
                 con.Open();
                 int i = cmd.ExecuteNonQuery();
-                return i == 1;
+                return i > 0;
             }
             catch (Exception e)
             {
@@ -186,7 +190,7 @@ namespace StudentManager.Areas.Admin.Models
                 con.Open();
                 int i = cmd.ExecuteNonQuery();
                 con.Close();
-                return i == 1;
+                return i > 0;
             }
             catch (Exception e)
             {

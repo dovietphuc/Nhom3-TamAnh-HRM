@@ -40,9 +40,9 @@
                         @Html.DisplayNameFor(model => model.sTepDinhKem)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.iMaNhanVien)
+                        @Html.DisplayNameFor(model => model.sTenNhanVien)
                     </th>
-                    <th class="text-center"></th>
+                    <th class="text-center">Tác vụ</th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -52,13 +52,13 @@
                             @Html.DisplayFor(modelItem => item.iSoHopDong)
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.dNgayKy)
+                            @item.dNgayKy.ToString("dd/MM/yyyy")
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.dNgayCoHieuLuc)
+                            @item.dNgayCoHieuLuc.ToString("dd/MM/yyyy")
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.dNgayHetHan)
+                            @item.dNgayHetHan.ToString("dd/MM/yyyy")
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.iLuongCoBan)
@@ -73,7 +73,7 @@
                             @Html.DisplayFor(modelItem => item.sTepDinhKem)
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.iMaNhanVien)
+                            @Html.DisplayFor(modelItem => item.sTenNhanVien)
                         </td>
                         <td class="text-center">
                             <a href="@Url.Action("Edit", "QuanLyHopDong", new { id = item.ID })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>

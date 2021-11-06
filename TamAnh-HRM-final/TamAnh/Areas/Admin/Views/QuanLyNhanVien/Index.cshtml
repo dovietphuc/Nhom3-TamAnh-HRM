@@ -1,0 +1,90 @@
+﻿@model IEnumerable<StudentManager.Areas.Admin.Models.NhanVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading"><strong>Quản lý nhân viên</strong></div>
+        <div class="panel-body">
+            <p class="text-right">
+                <a href="@Url.Action("Create", "QuanLyNhanVien")" class="btn btn-sm btn-success"> Thêm mới <i class="glyphicon glyphicon-plus"></i></a>
+            </p>
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenNhanVien)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dNgaySinh)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.bGioiTinh)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sDiaChi)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sDienThoai)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sBangCap)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sCMT)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenVTCV)
+                    </th>
+                    <th class="text-center">
+                        Tác vụ
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sTenNhanVien)
+                        </td>
+                        <td class="text-center">
+                            @item.dNgaySinh.ToString("dd/MM/yyyy")
+                        </td>
+                        <td class="text-center">
+                            @if (item.bGioiTinh)
+                            {
+                                @Html.Encode("Nam")
+                            }
+                            else
+                            {
+                                @Html.Encode("Nữ")
+                            }
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sDiaChi)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sDienThoai)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sBangCap)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sCMT)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.sTenVTCV)
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "QuanLyNhanVien", new { id = item.ID })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="@Url.Action("Delete", "QuanLyNhanVien", new { id = item.ID })" class="btn btn-sm btn-danger delete"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

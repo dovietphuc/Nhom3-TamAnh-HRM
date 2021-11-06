@@ -124,10 +124,12 @@
     <Compile Include="Areas\Admin\Controllers\KhenThuongKyLuatController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyChungChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyHopDongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyNhanVienController.cs" />
     <Compile Include="Areas\Admin\Models\Chungchi.cs" />
     <Compile Include="Areas\Admin\Models\DBConnection.cs" />
     <Compile Include="Areas\Admin\Models\HopDong.cs" />
     <Compile Include="Areas\Admin\Models\Khenthuongkyluat.cs" />
+    <Compile Include="Areas\Admin\Models\NhanVien.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +158,9 @@
     <Content Include="Areas\Admin\Views\QuanLyHopDong\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyHopDong\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyHopDong\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
