@@ -26,7 +26,8 @@ namespace StudentManager.Areas.Admin.Controllers
         // GET: Admin/QuanLyNhanVien/Create
         public ActionResult Create()
         {
-            return View();
+            NhanVien_VTCV_Model nhanVien_VTCV_Model = new NhanVien_VTCV_Model();
+            return View(nhanVien_VTCV_Model);
         }
 
         // POST: Admin/QuanLyNhanVien/Create
@@ -42,7 +43,8 @@ namespace StudentManager.Areas.Admin.Controllers
             }
             catch
             {
-                return View();
+                NhanVien_VTCV_Model nhanVien_VTCV_Model = new NhanVien_VTCV_Model();
+                return View(nhanVien_VTCV_Model);
             }
         }
 

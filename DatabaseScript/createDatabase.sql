@@ -204,3 +204,59 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+USE [Quanlynhansu]
+GO
+
+/****** Object:  Table [dbo].[tblquyetdinhchuyen_vtcongviec]    Script Date: 11/6/2021 11:02:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblquyetdinhchuyen_vtcongviec](
+	[PK_QĐCVTCV_iId] [int] NOT NULL,
+	[QĐCVTCV_dThoigianlap] [datetime] NULL,
+	[QĐCVTCV_dThoigianduyet] [datetime] NULL,
+	[FK_NhanVien_iMaNhanVien] [int] NOT NULL,
+	[FK_NhanVien_iMaNhanVienDuyet] [int] NOT NULL,
+	[FK_VTCV_iIdcu] [int] NOT NULL,
+	[FK_VTCV_iIdmoi] [int] NOT NULL,
+	[QĐCVTCV_sLyDo] [nvarchar](200) NULL,
+	[QĐCVTCV_dTrangThai] [int] NULL,
+ CONSTRAINT [PK_tblquyetdinhchuyen_vtcongviec] PRIMARY KEY CLUSTERED 
+(
+	[PK_QĐCVTCV_iId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien] FOREIGN KEY([FK_NhanVien_iMaNhanVienDuyet])
+REFERENCES [dbo].[tblnhanvien] ([PK_iIdNhanVien])
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien]
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien_lap] FOREIGN KEY([FK_NhanVien_iMaNhanVien])
+REFERENCES [dbo].[tblnhanvien] ([PK_iIdNhanVien])
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien_lap]
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblvitricongviec] FOREIGN KEY([FK_VTCV_iIdcu])
+REFERENCES [dbo].[tblvitricongviec] ([PK_VCCV_iMaVCCV])
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblvitricongviec]
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblvitricongviec1] FOREIGN KEY([FK_VTCV_iIdmoi])
+REFERENCES [dbo].[tblvitricongviec] ([PK_VCCV_iMaVCCV])
+GO
+
+ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblvitricongviec1]
+GO
+

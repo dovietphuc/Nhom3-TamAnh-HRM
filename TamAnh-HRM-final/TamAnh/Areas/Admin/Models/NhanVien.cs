@@ -122,7 +122,7 @@ namespace StudentManager.Areas.Admin.Models
             cmd.Parameters.AddWithValue("@GioiTinh", nhanVien.bGioiTinh);
             cmd.Parameters.AddWithValue("@DiaChi", nhanVien.sDiaChi);
             cmd.Parameters.AddWithValue("@DienThoai", nhanVien.sDienThoai);
-            cmd.Parameters.AddWithValue("@BangCap", nhanVien.sBangCap);
+            cmd.Parameters.AddWithValue("@BangCap", nhanVien.sBangCap != null ? nhanVien.sBangCap : "");
             cmd.Parameters.AddWithValue("@CMT", nhanVien.sCMT);
             cmd.Parameters.AddWithValue("@MaVTCV", nhanVien.iMaVTCV);
             con.Open();
@@ -154,7 +154,7 @@ namespace StudentManager.Areas.Admin.Models
                 cmd.Parameters.AddWithValue("@GioiTinh", nhanVien.bGioiTinh);
                 cmd.Parameters.AddWithValue("@DiaChi", nhanVien.sDiaChi);
                 cmd.Parameters.AddWithValue("@DienThoai", nhanVien.sDienThoai);
-                cmd.Parameters.AddWithValue("@BangCap", nhanVien.sBangCap);
+                cmd.Parameters.AddWithValue("@BangCap", nhanVien.sBangCap != null ? nhanVien.sBangCap : "");
                 cmd.Parameters.AddWithValue("@CMT", nhanVien.sCMT);
                 cmd.Parameters.AddWithValue("@MaVTCV", nhanVien.iMaVTCV);
                 cmd.Parameters.AddWithValue("@id", nhanVien.ID);

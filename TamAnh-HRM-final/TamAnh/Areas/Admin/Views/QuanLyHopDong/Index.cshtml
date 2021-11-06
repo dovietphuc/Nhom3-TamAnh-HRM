@@ -42,7 +42,6 @@
                     <th class="text-center">
                         @Html.DisplayNameFor(model => model.sTenNhanVien)
                     </th>
-                    <th class="text-center">Tác vụ</th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -70,14 +69,10 @@
                             @Html.DisplayFor(modelItem => item.sGhiChu)
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.sTepDinhKem)
+                            <a href="@item.sTepDinhKem" target="_blank" >@item.sTepDinhKem</a>
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.sTenNhanVien)
-                        </td>
-                        <td class="text-center">
-                            <a href="@Url.Action("Edit", "QuanLyHopDong", new { id = item.ID })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="@Url.Action("Delete", "QuanLyHopDong", new { id = item.ID })" class="btn btn-sm btn-danger delete"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
                 }

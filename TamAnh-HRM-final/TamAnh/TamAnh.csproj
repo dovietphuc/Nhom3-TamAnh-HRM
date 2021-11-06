@@ -128,8 +128,12 @@
     <Compile Include="Areas\Admin\Models\Chungchi.cs" />
     <Compile Include="Areas\Admin\Models\DBConnection.cs" />
     <Compile Include="Areas\Admin\Models\HopDong.cs" />
+    <Compile Include="Areas\Admin\Models\HopDong_NhanVien_Model.cs" />
     <Compile Include="Areas\Admin\Models\Khenthuongkyluat.cs" />
     <Compile Include="Areas\Admin\Models\NhanVien.cs" />
+    <Compile Include="Areas\Admin\Models\NhanVien_VTCV_Model.cs" />
+    <Compile Include="Areas\Admin\Models\QuyetDinhThuyenChuyen.cs" />
+    <Compile Include="Areas\Admin\Models\ViTriCongViec.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,10 +141,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -157,11 +164,14 @@
     <Content Include="Areas\Admin\Views\KhenThuongKyLuat\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyHopDong\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyHopDong\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyHopDong\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhanVien\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhanVien\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhanVien\Create.cshtml" />
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -190,6 +200,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\ChuyenVCCV\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -26,7 +26,8 @@ namespace StudentManager.Areas.Admin.Controllers
         // GET: Admin/QuanLyHopDong/Create
         public ActionResult Create()
         {
-            return View();
+            HopDong_NhanVien_Model obj = new HopDong_NhanVien_Model();
+            return View(obj);
         }
 
         // POST: Admin/QuanLyHopDong/Create
@@ -42,16 +43,15 @@ namespace StudentManager.Areas.Admin.Controllers
             }
             catch(Exception e)
             {
-                return View();
+                HopDong_NhanVien_Model obj = new HopDong_NhanVien_Model();
+                return View(obj);
             }
         }
 
         // GET: Admin/QuanLyHopDong/Edit/5
         public ActionResult Edit(int ID)
         {
-            ListHopDong listHopDong = new ListHopDong();
-            List<HopDong> obj = listHopDong.get(ID);
-            return View(obj.FirstOrDefault());
+            return View();
         }
 
         // POST: Admin/QuanLyHopDong/Edit/5
@@ -61,8 +61,7 @@ namespace StudentManager.Areas.Admin.Controllers
             try
             {
                 // TODO: Add update logic here
-                ListHopDong listHopDong = new ListHopDong();
-                listHopDong.update(hopDong);
+
                 return RedirectToAction("Index");
             }
             catch
@@ -84,8 +83,7 @@ namespace StudentManager.Areas.Admin.Controllers
             try
             {
                 // TODO: Add delete logic here
-                ListHopDong listHopDong = new ListHopDong();
-                listHopDong.delete(id);
+
                 return RedirectToAction("Index");
             }
             catch

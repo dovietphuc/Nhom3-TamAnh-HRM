@@ -46,7 +46,7 @@ namespace StudentManager.Areas.Admin.Models
         [Display(Name = "Mã nhân viên")]
         public int iMaNhanVien { get; set; }
 
-        [Display(Name = "Tên nhân viên")]
+        [Display(Name = "Nhân viên")]
         public string sTenNhanVien { get; set; }
     }
 
@@ -129,8 +129,8 @@ namespace StudentManager.Areas.Admin.Models
             cmd.Parameters.AddWithValue("@NgayHetHan", hopDong.dNgayHetHan);
             cmd.Parameters.AddWithValue("@LuongCoBan", hopDong.iLuongCoBan);
             cmd.Parameters.AddWithValue("@LuongDongBH", hopDong.iLuongDongBH);
-            cmd.Parameters.AddWithValue("@GhiChu", hopDong.sGhiChu);
-            cmd.Parameters.AddWithValue("@TepDinhKem", hopDong.sTepDinhKem);
+            cmd.Parameters.AddWithValue("@GhiChu", hopDong.sGhiChu != null ? hopDong.sGhiChu : "");
+            cmd.Parameters.AddWithValue("@TepDinhKem", hopDong.sTepDinhKem != null ? hopDong.sTepDinhKem : "");
             cmd.Parameters.AddWithValue("@IDNhanVien", hopDong.iMaNhanVien);
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -163,8 +163,8 @@ namespace StudentManager.Areas.Admin.Models
                 cmd.Parameters.AddWithValue("@dNgayHetHan", hopDong.dNgayHetHan);
                 cmd.Parameters.AddWithValue("@iLuongCoBan", hopDong.iLuongCoBan);
                 cmd.Parameters.AddWithValue("@iLuongDongBH", hopDong.iLuongDongBH);
-                cmd.Parameters.AddWithValue("@sGhiChu", hopDong.sGhiChu);
-                cmd.Parameters.AddWithValue("@sTepDinhKem", hopDong.sTepDinhKem);
+                cmd.Parameters.AddWithValue("@sGhiChu", hopDong.sGhiChu != null ? hopDong.sGhiChu : "");
+                cmd.Parameters.AddWithValue("@sTepDinhKem", hopDong.sTepDinhKem != null ? hopDong.sTepDinhKem : "");
                 cmd.Parameters.AddWithValue("@iIDNhanVien", hopDong.iMaNhanVien);
                 cmd.Parameters.AddWithValue("@id", hopDong.ID);
                 con.Open();
