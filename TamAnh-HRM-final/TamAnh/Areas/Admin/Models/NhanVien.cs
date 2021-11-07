@@ -45,6 +45,8 @@ namespace StudentManager.Areas.Admin.Models
 
         [Display(Name = "Vị trí công việc")]
         public string sTenVTCV { get; set; }
+
+        public ViTriCongViec viTriCongViec { get; set; }
     }
 
     public class ListNhanVien
@@ -60,9 +62,9 @@ namespace StudentManager.Areas.Admin.Models
         {
             String sql;
             if (ID == 0)
-                sql = "SELECT * FROM tblnhanvien JOIN tblvitricongviec ON tblnhanvien.FK_VCCV_iMaVCCV = tblvitricongviec.PK_VCCV_iMaVCCV";
+                sql = "SELECT * FROM tblnhanvien";
             else
-                sql = "SELECT * FROM tblnhanvien JOIN tblvitricongviec ON tblnhanvien.FK_VCCV_iMaVCCV = tblvitricongviec.PK_VCCV_iMaVCCV WHERE PK_iIdNhanVien = " + ID;
+                sql = "SELECT * FROM tblnhanvien WHERE PK_iIdNhanVien = " + ID;
 
             List<NhanVien> nhanViens = new List<NhanVien>();
 
@@ -86,7 +88,8 @@ namespace StudentManager.Areas.Admin.Models
                 nhanVien.sBangCap = dt.Rows[i]["NhanVien_sBangCap"].ToString();
                 nhanVien.sCMT = dt.Rows[i]["NhanVien_sCMT"].ToString();
                 nhanVien.iMaVTCV = Convert.ToInt32(dt.Rows[i]["FK_VCCV_iMaVCCV"].ToString());
-                nhanVien.sTenVTCV = dt.Rows[i]["VCCV_sTenVCCV"].ToString();
+                nhanVien.viTriCongViec = new ListViTri().get(nhanVien.iMaVTCV).FirstOrDefault();
+                nhanVien.sTenVTCV = nhanVien.viTriCongViec.sTenViTri;
 
                 nhanViens.Add(nhanVien);
             }

@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChuyenViTriCongViecController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhenThuongKyLuatController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyChungChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLyHopDongController.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Areas\Admin\Models\NhanVien.cs" />
     <Compile Include="Areas\Admin\Models\NhanVien_VTCV_Model.cs" />
     <Compile Include="Areas\Admin\Models\QuyetDinhThuyenChuyen.cs" />
+    <Compile Include="Areas\Admin\Models\QuyetDinh_VTCV_NhanVien_Model.cs" />
     <Compile Include="Areas\Admin\Models\ViTriCongViec.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,6 +171,8 @@
     <Content Include="Areas\Admin\Views\QuanLyNhanVien\Create.cshtml" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
+    <Content Include="Areas\Admin\Views\ChuyenViTriCongViec\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuyenViTriCongViec\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -200,7 +204,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\ChuyenVCCV\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -44,6 +44,7 @@ namespace StudentManager.Areas.Admin.Controllers
             catch
             {
                 NhanVien_VTCV_Model nhanVien_VTCV_Model = new NhanVien_VTCV_Model();
+                nhanVien_VTCV_Model.NhanVien = nhanVien;
                 return View(nhanVien_VTCV_Model);
             }
         }

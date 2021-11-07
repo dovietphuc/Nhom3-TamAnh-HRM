@@ -31,6 +31,7 @@
                             <li><a href="./Admin/Khenthuongkyluat">Khen thưởng, kỷ luật</a></li>
                             <li><a href="./Admin/QuanLyHopDong">Quản lý hợp đồng</a></li>
                             <li><a href="./Admin/QuanLyNhanVien">Quản lý nhân viên</a></li>
+                            <li><a href="./Admin/ChuyenViTriCongViec">Chuyển vị trí công việc</a></li>
                         </ul>
                     </li>
                     <li>
@@ -55,6 +56,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/chosen.jquery.js"></script>
+    <script src="https://kit.fontawesome.com/2858e99d1e.js" crossorigin="anonymous"></script>
     <script language="javascript">
         $(document).ready(() => {
             const listBtnRemove = $(".delete");
@@ -68,6 +70,36 @@
                     }).done(() => {
                         $(this).parent().parent().remove();
                         console.log("Remove done");
+                    })
+                }
+            })
+            const listBtnAproved = $(".aproved");
+            listBtnAproved.on("click", function (e) {
+                console.log($(this).attr("href"));
+                e.preventDefault();
+                if (confirm("Xác nhận phê duyệt ?")) {
+                    $.ajax({
+                        url: $(this).attr("href"),
+                        type: "POST"
+                    }).done(() => {
+                        $(this).parent().parent().find(".state").html("Đã duyệt");
+                        $(this).parent().parent().find(".btn").remove();
+                        console.log("Aproved done");
+                    })
+                }
+            })
+            const listBtnNotAproved = $(".not-aproved");
+            listBtnNotAproved.on("click", function (e) {
+                console.log($(this).attr("href"));
+                e.preventDefault();
+                if (confirm("Xác nhận không phê duyệt không?")) {
+                    $.ajax({
+                        url: $(this).attr("href"),
+                        type: "POST"
+                    }).done(() => {
+                        $(this).parent().parent().find(".state").html("Không duyệt");
+                        $(this).parent().parent().find(".btn").remove();
+                        console.log("Not aproved done");
                     })
                 }
             })

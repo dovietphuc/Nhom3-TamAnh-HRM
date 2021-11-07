@@ -216,7 +216,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[tblquyetdinhchuyen_vtcongviec](
-	[PK_QĐCVTCV_iId] [int] NOT NULL,
+	[PK_QĐCVTCV_iId] [int] IDENTITY(1,1) NOT NULL,
 	[QĐCVTCV_dThoigianlap] [datetime] NULL,
 	[QĐCVTCV_dThoigianduyet] [datetime] NULL,
 	[FK_NhanVien_iMaNhanVien] [int] NOT NULL,
@@ -230,13 +230,6 @@ CREATE TABLE [dbo].[tblquyetdinhchuyen_vtcongviec](
 	[PK_QĐCVTCV_iId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien] FOREIGN KEY([FK_NhanVien_iMaNhanVienDuyet])
-REFERENCES [dbo].[tblnhanvien] ([PK_iIdNhanVien])
-GO
-
-ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien]
 GO
 
 ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec]  WITH CHECK ADD  CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblnhanvien_lap] FOREIGN KEY([FK_NhanVien_iMaNhanVien])

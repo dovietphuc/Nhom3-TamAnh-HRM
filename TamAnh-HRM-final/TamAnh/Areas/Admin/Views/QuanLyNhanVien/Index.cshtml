@@ -40,6 +40,9 @@
                         @Html.DisplayNameFor(model => model.sTenVTCV)
                     </th>
                     <th class="text-center">
+                        @Html.DisplayNameFor(model => model.viTriCongViec.sTenBoPhan)
+                    </th>
+                    <th class="text-center">
                         Tác vụ
                     </th>
                 </tr>
@@ -77,6 +80,9 @@
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => item.sTenVTCV)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.viTriCongViec.sTenBoPhan)
                         </td>
                         <td class="text-center">
                             <a href="@Url.Action("Edit", "QuanLyNhanVien", new { id = item.ID })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>

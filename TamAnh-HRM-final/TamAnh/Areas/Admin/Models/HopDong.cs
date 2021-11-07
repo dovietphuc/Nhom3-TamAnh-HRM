@@ -48,6 +48,8 @@ namespace StudentManager.Areas.Admin.Models
 
         [Display(Name = "Nhân viên")]
         public string sTenNhanVien { get; set; }
+
+        public NhanVien nhanVien { get; set; }
     }
 
     public class ListHopDong
@@ -63,9 +65,9 @@ namespace StudentManager.Areas.Admin.Models
         {
             String sql;
             if (ID == 0)
-                sql = "SELECT * FROM tblhopdonglaodong JOIN tblnhanvien ON tblhopdonglaodong.FK_NhanVien_iIDNhanVien = tblnhanvien.PK_iIdNhanVien";
+                sql = "SELECT * FROM tblhopdonglaodong";
             else
-                sql = "SELECT * FROM tblhopdonglaodong JOIN tblnhanvien ON tblhopdonglaodong.FK_NhanVien_iIDNhanVien = tblnhanvien.PK_iIdNhanVien WHERE PK_HDLD_iMaHD = " + ID;
+                sql = "SELECT * FROM tblhopdonglaodong WHERE PK_HDLD_iMaHD = " + ID;
 
             List<HopDong> listHopDong = new List<HopDong>();
 
@@ -90,7 +92,8 @@ namespace StudentManager.Areas.Admin.Models
                 hopDong.sGhiChu = dt.Rows[i]["HDLD_sGhiChu"].ToString();
                 hopDong.sTepDinhKem = dt.Rows[i]["HDLD_sTepDinhKem"].ToString();
                 hopDong.iMaNhanVien = Convert.ToInt32(dt.Rows[i]["FK_NhanVien_iIDNhanVien"].ToString());
-                hopDong.sTenNhanVien = dt.Rows[i]["NhanVien_sHoVaTen"].ToString();
+                hopDong.nhanVien = new ListNhanVien().get(hopDong.iMaNhanVien).FirstOrDefault();
+                hopDong.sTenNhanVien = hopDong.nhanVien.sTenNhanVien;
 
                 listHopDong.Add(hopDong);
             }

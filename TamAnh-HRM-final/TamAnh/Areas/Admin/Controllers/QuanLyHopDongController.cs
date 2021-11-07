@@ -44,6 +44,7 @@ namespace StudentManager.Areas.Admin.Controllers
             catch(Exception e)
             {
                 HopDong_NhanVien_Model obj = new HopDong_NhanVien_Model();
+                obj.HopDong = hopDong;
                 return View(obj);
             }
         }

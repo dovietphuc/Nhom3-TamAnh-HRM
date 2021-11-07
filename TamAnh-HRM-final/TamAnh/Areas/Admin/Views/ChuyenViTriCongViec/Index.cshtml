@@ -1,0 +1,111 @@
+﻿@model IEnumerable<StudentManager.Areas.Admin.Models.QuyetDinhThuyenChuyen>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading"><strong>Quản lý nhân viên</strong></div>
+        <div class="panel-body">
+            <p class="text-right">
+                <a href="@Url.Action("Create", "ChuyenViTriCongViec")" class="btn btn-sm btn-success"> Thêm mới <i class="glyphicon glyphicon-plus"></i></a>
+            </p>
+            <table class="table table-bordered table-condensed table-hover table-striped">
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dThoiGianLap)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.dThoiGianDuyet)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenNVLap)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenNVDuyet)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenVTCV_Cu)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenBoPhan_Cu)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenVTCV_Moi)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sTenBoPhan_Moi)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.sLyDo)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.iTrangThai)
+                    </th>
+                    <th class="text-center">Tác vụ</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td class="text-center">
+                    @item.dThoiGianLap.ToString("dd/MM/yyyy HH:mm")
+                </td>
+                <td class="text-center">
+                    @if (!item.dThoiGianDuyet.Equals((DateTime)System.Data.SqlTypes.SqlDateTime.MinValue))
+                    {
+                        @item.dThoiGianDuyet.ToString("dd/MM/yyyy HH:mm")
+                    }
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenNVLap)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenNVDuyet)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenVTCV_Cu)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenBoPhan_Cu)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenVTCV_Moi)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sTenBoPhan_Moi)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.sLyDo)
+                </td>
+                <td class="text-center">
+
+                    @if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
+                    {
+                        <span class="state">Chờ duyệt</span>
+                    }
+                    else if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_APPROVED)
+                    {
+                        <span class="state">Đã duyệt</span>
+                    }
+                    else if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_NOT_APPROVED)
+                    {
+                        <span class="state">Không duyệt</span>
+                    }
+                </td>
+                <td class="text-center">
+                    @if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
+                    {
+                        <a href="@Url.Action("Aproved", "ChuyenViTriCongViec", new { id = item.ID })" class="btn btn-sm btn-primary aproved"><i class="fas fa-check"></i></a>
+                        <a href="@Url.Action("NotAproved", "ChuyenViTriCongViec", new { id = item.ID })" class="btn btn-sm btn-danger not-aproved"><i class="fas fa-times"></i></a>
+                    }
+                </td>
+            </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
