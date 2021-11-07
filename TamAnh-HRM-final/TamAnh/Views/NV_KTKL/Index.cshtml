@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TamAnh.Models.tblnhanvien_khenthuong_kyluat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><strong>Chứng chỉ</strong></div>
+    <div class="panel-body">
+        <p class="text-right">
+            <a href="@Url.Action("Create", "NV_KTKL")" class="btn btn-sm btn-success"> Thêm mới <i class="glyphicon glyphicon-plus"></i></a>
+        </p>
+        <table class="table table-bordered table-condensed table-hover table-striped">
+            <tr>
+                <th class="text-center">
+                    Nhân viên
+                </th>
+                <th class="text-center">
+                    Tiêu đề
+                </th>
+                <th class="text-center">
+                    Nội dung
+                </th>
+                <th class="text-center">
+                    Tác vụ
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblnhanvien.NhanVien_sHoVaTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblkhenthuong_kyluat.KTKL_sTieuDe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NVKTKL_sNoiDung)
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", "NV_KTKL", new { id = item.PK_NV_KTKL_iId })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="@Url.Action("Delete", "NV_KTKL", new { id = item.PK_NV_KTKL_iId })" class="btn btn-sm btn-danger delete"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

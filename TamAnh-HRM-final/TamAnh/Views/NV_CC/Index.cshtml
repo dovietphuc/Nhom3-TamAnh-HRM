@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TamAnh.Models.tblchungchi>
+
+@{
+    ViewBag.Title = "Danh sách chứng chỉ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><strong>Chứng chỉ</strong></div>
+    <div class="panel-body">
+        <p class="text-right">
+            <a href="@Url.Action("Create", "NV_CC")" class="btn btn-sm btn-success"> Thêm mới <i class="glyphicon glyphicon-plus"></i></a>
+        </p>
+        <table class="table table-bordered table-condensed table-hover table-striped">
+            <tr>
+                <th class="text-center">
+                    Tên chứng chỉ
+                </th>
+                <th class="text-center">
+                    Ngày bắt đầu
+                </th>
+                <th class="text-center">
+                    Ngày kết thúc
+                </th>
+                <th class="text-center">
+                    Tệp đính kèm
+                </th>
+                <th class="text-center">
+                    Nhân viên
+                </th>
+                <th class="text-center">
+                    Tác vụ
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChungChi_sTenChungChi)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.ChungChi_dNgayBD)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.ChungChi_dNgayKT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChungChi_sTepDinhKem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblnhanvien.NhanVien_sHoVaTen)
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", "NV_CC", new { id = item.PK_ChungChi_iMaCC })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="@Url.Action("Delete", "NV_CC", new { id = item.PK_ChungChi_iMaCC })" class="btn btn-sm btn-danger delete"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

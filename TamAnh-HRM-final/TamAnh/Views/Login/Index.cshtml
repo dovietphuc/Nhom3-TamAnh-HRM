@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" type="text/css" href="../../Content/Site.css">
+</head>
+<body>
+    <div class="login">
+        <form method="post" action="@Url.Action("Login", "Login")">
+            <h2>TÂM ANH</h2>
+            <br>
+            <input type="text" name="username" placeholder="Username" class="pl20">
+            <input type="password" name="password" placeholder="Password" class="pl20">
+            <p class="notify text-center">@ViewBag.error</p>
+            <input type="submit" value="Đăng nhập">
+        </form>
+    </div>
+
+</body>
+</html>

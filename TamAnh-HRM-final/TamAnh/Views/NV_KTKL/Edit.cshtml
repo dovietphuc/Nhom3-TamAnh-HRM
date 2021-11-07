@@ -1,0 +1,60 @@
+﻿@model TamAnh.Models.tblnhanvien_khenthuong_kyluat
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-group {
+        overflow: hidden;
+    }
+</style>
+
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><strong>Sửa khen thưởng kỷ luật</strong></div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.PK_NV_KTKL_iId)
+            <div class="form-group">
+                <label class="control-label col-md-2">Nhân viên</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("FK_NhanVien_iId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FK_NhanVien_iId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Khen thưởng, kỷ luật</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("FK_KTKL_iId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FK_KTKL_iId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Nội dung</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NVKTKL_sNoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NVKTKL_sNoiDung, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Lưu lại" class="btn btn-default" />
+                </div>
+            </div>
+        }
+
+        <div>
+            <a href="@Url.Action("Index", "tblnhanvien_khenthuong_kyluat")" class="btn btn-sm btn-primary"> Quay lại</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

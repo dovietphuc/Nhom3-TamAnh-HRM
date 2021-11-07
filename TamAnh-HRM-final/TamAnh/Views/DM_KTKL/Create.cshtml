@@ -1,0 +1,72 @@
+﻿@model TamAnh.Models.tblkhenthuong_kyluat
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><strong>Tạo mới khen thưởng kỷ luật</strong></div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tiêu đề</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KTKL_sTieuDe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Thời gian lập</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KTKL_dThoiGianLap, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Thời gian duyệt</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KTKL_dThoiGianDuyet, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Kinh phí</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KTKL_iKinhPhi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Ghi chú</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KTKL_sGhiChu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KTKL_sGhiChu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Tạo mới" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            <a href="@Url.Action("Index", "NV_KTKL")" class="btn btn-sm btn-primary"> Quay lại</a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

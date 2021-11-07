@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanlynhansuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblbophan">
+          <Key>
+            <PropertyRef Name="PK_BoPhan_iMaBoPhan" />
+          </Key>
+          <Property Name="PK_BoPhan_iMaBoPhan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoPhan_sTenBoPhan" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblchungchi">
+          <Key>
+            <PropertyRef Name="PK_ChungChi_iMaCC" />
+          </Key>
+          <Property Name="PK_ChungChi_iMaCC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChungChi_sTenChungChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChungChi_dNgayBD" Type="date" />
+          <Property Name="ChungChi_dNgayKT" Type="date" />
+          <Property Name="ChungChi_sTepDinhKem" Type="nvarchar" MaxLength="50" />
+          <Property Name="FK_NhanVien_iIDNhanVien" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblkhenthuong_kyluat">
+          <Key>
+            <PropertyRef Name="PK_KTKL_iId" />
+          </Key>
+          <Property Name="PK_KTKL_iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KTKL_sTieuDe" Type="nvarchar" MaxLength="50" />
+          <Property Name="KTKL_dThoiGianLap" Type="date" />
+          <Property Name="KTKL_dThoiGianDuyet" Type="date" />
+          <Property Name="KTKL_iKinhPhi" Type="int" />
+          <Property Name="KTKL_sGhiChu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblnhanvien">
+          <Key>
+            <PropertyRef Name="PK_iIdNhanVien" />
+          </Key>
+          <Property Name="PK_iIdNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NhanVien_sHoVaTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_sNgaySinh" Type="datetime" Nullable="false" />
+          <Property Name="NhanVien_sGioiTinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_sDiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_sDienThoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_sBangCap" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_sCMT" Type="nvarchar" MaxLength="50" />
+          <Property Name="FK_VCCV_iMaVCCV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblnhanvien_khenthuong_kyluat">
+          <Key>
+            <PropertyRef Name="PK_NV_KTKL_iId" />
+          </Key>
+          <Property Name="PK_NV_KTKL_iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_NhanVien_iId" Type="int" Nullable="false" />
+          <Property Name="FK_KTKL_iId" Type="int" Nullable="false" />
+          <Property Name="NVKTKL_sNoiDung" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblquyen">
+          <Key>
+            <PropertyRef Name="PK_Quyen_iId" />
+          </Key>
+          <Property Name="PK_Quyen_iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quyen_sTen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbltaikhoan">
+          <Key>
+            <PropertyRef Name="PK_TaiKhoan_iId" />
+          </Key>
+          <Property Name="PK_TaiKhoan_iId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaiKhoan_sTen" Type="varchar" MaxLength="50" />
+          <Property Name="TaiKhoan_sMatKhau" Type="varchar" MaxLength="50" />
+          <Property Name="TaiKhoan_sTrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaiKhoan_sThoiGianCap" Type="date" />
+          <Property Name="FK_NhanVien_iId" Type="int" />
+          <Property Name="FK_Quyen_iId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblvitricongviec">
+          <Key>
+            <PropertyRef Name="PK_VCCV_iMaVCCV" />
+          </Key>
+          <Property Name="PK_VCCV_iMaVCCV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VCCV_sTenVCCV" Type="nvarchar" MaxLength="100" />
+          <Property Name="VCCV_sMoTaVCCV" Type="nvarchar" MaxLength="100" />
+          <Property Name="FK_BoPhan_MaBP" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblchungc__FK_Nh__30C33EC3">
+          <End Role="tblnhanvien" Type="Self.tblnhanvien" Multiplicity="1" />
+          <End Role="tblchungchi" Type="Self.tblchungchi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tblchungchi">
+              <PropertyRef Name="FK_NhanVien_iIDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblnhanvi__FK_KT__2DE6D218">
+          <End Role="tblkhenthuong_kyluat" Type="Self.tblkhenthuong_kyluat" Multiplicity="1" />
+          <End Role="tblnhanvien_khenthuong_kyluat" Type="Self.tblnhanvien_khenthuong_kyluat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblkhenthuong_kyluat">
+              <PropertyRef Name="PK_KTKL_iId" />
+            </Principal>
+            <Dependent Role="tblnhanvien_khenthuong_kyluat">
+              <PropertyRef Name="FK_KTKL_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblnhanvi__FK_Nh__2CF2ADDF">
+          <End Role="tblnhanvien" Type="Self.tblnhanvien" Multiplicity="1" />
+          <End Role="tblnhanvien_khenthuong_kyluat" Type="Self.tblnhanvien_khenthuong_kyluat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tblnhanvien_khenthuong_kyluat">
+              <PropertyRef Name="FK_NhanVien_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblnhanvi__FK_VC__1DB06A4F">
+          <End Role="tblvitricongviec" Type="Self.tblvitricongviec" Multiplicity="1" />
+          <End Role="tblnhanvien" Type="Self.tblnhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblvitricongviec">
+              <PropertyRef Name="PK_VCCV_iMaVCCV" />
+            </Principal>
+            <Dependent Role="tblnhanvien">
+              <PropertyRef Name="FK_VCCV_iMaVCCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbltaikho__FK_Nh__2739D489">
+          <End Role="tblnhanvien" Type="Self.tblnhanvien" Multiplicity="0..1" />
+          <End Role="tbltaikhoan" Type="Self.tbltaikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tbltaikhoan">
+              <PropertyRef Name="FK_NhanVien_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbltaikho__FK_Qu__282DF8C2">
+          <End Role="tblquyen" Type="Self.tblquyen" Multiplicity="0..1" />
+          <End Role="tbltaikhoan" Type="Self.tbltaikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblquyen">
+              <PropertyRef Name="PK_Quyen_iId" />
+            </Principal>
+            <Dependent Role="tbltaikhoan">
+              <PropertyRef Name="FK_Quyen_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblvitric__FK_Bo__1AD3FDA4">
+          <End Role="tblbophan" Type="Self.tblbophan" Multiplicity="1" />
+          <End Role="tblvitricongviec" Type="Self.tblvitricongviec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblbophan">
+              <PropertyRef Name="PK_BoPhan_iMaBoPhan" />
+            </Principal>
+            <Dependent Role="tblvitricongviec">
+              <PropertyRef Name="FK_BoPhan_MaBP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanlynhansuModelStoreContainer">
+          <EntitySet Name="tblbophan" EntityType="Self.tblbophan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblchungchi" EntityType="Self.tblchungchi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblkhenthuong_kyluat" EntityType="Self.tblkhenthuong_kyluat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblnhanvien" EntityType="Self.tblnhanvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblnhanvien_khenthuong_kyluat" EntityType="Self.tblnhanvien_khenthuong_kyluat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblquyen" EntityType="Self.tblquyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbltaikhoan" EntityType="Self.tbltaikhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblvitricongviec" EntityType="Self.tblvitricongviec" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblchungc__FK_Nh__30C33EC3" Association="Self.FK__tblchungc__FK_Nh__30C33EC3">
+            <End Role="tblnhanvien" EntitySet="tblnhanvien" />
+            <End Role="tblchungchi" EntitySet="tblchungchi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblnhanvi__FK_KT__2DE6D218" Association="Self.FK__tblnhanvi__FK_KT__2DE6D218">
+            <End Role="tblkhenthuong_kyluat" EntitySet="tblkhenthuong_kyluat" />
+            <End Role="tblnhanvien_khenthuong_kyluat" EntitySet="tblnhanvien_khenthuong_kyluat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblnhanvi__FK_Nh__2CF2ADDF" Association="Self.FK__tblnhanvi__FK_Nh__2CF2ADDF">
+            <End Role="tblnhanvien" EntitySet="tblnhanvien" />
+            <End Role="tblnhanvien_khenthuong_kyluat" EntitySet="tblnhanvien_khenthuong_kyluat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblnhanvi__FK_VC__1DB06A4F" Association="Self.FK__tblnhanvi__FK_VC__1DB06A4F">
+            <End Role="tblvitricongviec" EntitySet="tblvitricongviec" />
+            <End Role="tblnhanvien" EntitySet="tblnhanvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbltaikho__FK_Nh__2739D489" Association="Self.FK__tbltaikho__FK_Nh__2739D489">
+            <End Role="tblnhanvien" EntitySet="tblnhanvien" />
+            <End Role="tbltaikhoan" EntitySet="tbltaikhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbltaikho__FK_Qu__282DF8C2" Association="Self.FK__tbltaikho__FK_Qu__282DF8C2">
+            <End Role="tblquyen" EntitySet="tblquyen" />
+            <End Role="tbltaikhoan" EntitySet="tbltaikhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblvitric__FK_Bo__1AD3FDA4" Association="Self.FK__tblvitric__FK_Bo__1AD3FDA4">
+            <End Role="tblbophan" EntitySet="tblbophan" />
+            <End Role="tblvitricongviec" EntitySet="tblvitricongviec" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanlynhansuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblkhenthuong_kyluat">
+          <Key>
+            <PropertyRef Name="PK_KTKL_iId" />
+          </Key>
+          <Property Name="PK_KTKL_iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KTKL_sTieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KTKL_dThoiGianLap" Type="DateTime" Precision="0" />
+          <Property Name="KTKL_dThoiGianDuyet" Type="DateTime" Precision="0" />
+          <Property Name="KTKL_iKinhPhi" Type="Int32" />
+          <Property Name="KTKL_sGhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblnhanvien_khenthuong_kyluat" Relationship="Self.FK__tblnhanvi__FK_KT__2DE6D218" FromRole="tblkhenthuong_kyluat" ToRole="tblnhanvien_khenthuong_kyluat" />
+        </EntityType>
+        <EntityType Name="tblnhanvien">
+          <Key>
+            <PropertyRef Name="PK_iIdNhanVien" />
+          </Key>
+          <Property Name="PK_iIdNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NhanVien_sHoVaTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_sNgaySinh" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NhanVien_sGioiTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_sDiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_sDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_sBangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_sCMT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FK_VCCV_iMaVCCV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblnhanvien_khenthuong_kyluat" Relationship="Self.FK__tblnhanvi__FK_Nh__2CF2ADDF" FromRole="tblnhanvien" ToRole="tblnhanvien_khenthuong_kyluat" />
+          <NavigationProperty Name="tblchungchis" Relationship="QuanlynhansuModel.FK__tblchungc__FK_Nh__30C33EC3" FromRole="tblnhanvien" ToRole="tblchungchi1" />
+          <NavigationProperty Name="tblvitricongviec" Relationship="QuanlynhansuModel.FK__tblnhanvi__FK_VC__1DB06A4F" FromRole="tblnhanvien" ToRole="tblvitricongviec" />
+          <NavigationProperty Name="tbltaikhoans" Relationship="QuanlynhansuModel.FK__tbltaikho__FK_Nh__2739D489" FromRole="tblnhanvien" ToRole="tbltaikhoan" />
+        </EntityType>
+        <EntityType Name="tblnhanvien_khenthuong_kyluat">
+          <Key>
+            <PropertyRef Name="PK_NV_KTKL_iId" />
+          </Key>
+          <Property Name="PK_NV_KTKL_iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_NhanVien_iId" Type="Int32" Nullable="false" />
+          <Property Name="FK_KTKL_iId" Type="Int32" Nullable="false" />
+          <Property Name="NVKTKL_sNoiDung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblkhenthuong_kyluat" Relationship="Self.FK__tblnhanvi__FK_KT__2DE6D218" FromRole="tblnhanvien_khenthuong_kyluat" ToRole="tblkhenthuong_kyluat" />
+          <NavigationProperty Name="tblnhanvien" Relationship="Self.FK__tblnhanvi__FK_Nh__2CF2ADDF" FromRole="tblnhanvien_khenthuong_kyluat" ToRole="tblnhanvien" />
+        </EntityType>
+        <Association Name="FK__tblnhanvi__FK_KT__2DE6D218">
+          <End Role="tblkhenthuong_kyluat" Type="Self.tblkhenthuong_kyluat" Multiplicity="1" />
+          <End Role="tblnhanvien_khenthuong_kyluat" Type="Self.tblnhanvien_khenthuong_kyluat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblkhenthuong_kyluat">
+              <PropertyRef Name="PK_KTKL_iId" />
+            </Principal>
+            <Dependent Role="tblnhanvien_khenthuong_kyluat">
+              <PropertyRef Name="FK_KTKL_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblnhanvi__FK_Nh__2CF2ADDF">
+          <End Role="tblnhanvien" Type="Self.tblnhanvien" Multiplicity="1" />
+          <End Role="tblnhanvien_khenthuong_kyluat" Type="Self.tblnhanvien_khenthuong_kyluat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tblnhanvien_khenthuong_kyluat">
+              <PropertyRef Name="FK_NhanVien_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanlynhansuEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblkhenthuong_kyluat" EntityType="Self.tblkhenthuong_kyluat" />
+          <EntitySet Name="tblnhanviens" EntityType="Self.tblnhanvien" />
+          <EntitySet Name="tblnhanvien_khenthuong_kyluat" EntityType="Self.tblnhanvien_khenthuong_kyluat" />
+          <AssociationSet Name="FK__tblnhanvi__FK_KT__2DE6D218" Association="Self.FK__tblnhanvi__FK_KT__2DE6D218">
+            <End Role="tblkhenthuong_kyluat" EntitySet="tblkhenthuong_kyluat" />
+            <End Role="tblnhanvien_khenthuong_kyluat" EntitySet="tblnhanvien_khenthuong_kyluat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblnhanvi__FK_Nh__2CF2ADDF" Association="Self.FK__tblnhanvi__FK_Nh__2CF2ADDF">
+            <End Role="tblnhanvien" EntitySet="tblnhanviens" />
+            <End Role="tblnhanvien_khenthuong_kyluat" EntitySet="tblnhanvien_khenthuong_kyluat" />
+          </AssociationSet>
+          <EntitySet Name="tblbophans" EntityType="QuanlynhansuModel.tblbophan" />
+          <EntitySet Name="tblchungchis" EntityType="QuanlynhansuModel.tblchungchi" />
+          <EntitySet Name="tblquyens" EntityType="QuanlynhansuModel.tblquyen" />
+          <EntitySet Name="tbltaikhoans" EntityType="QuanlynhansuModel.tbltaikhoan" />
+          <EntitySet Name="tblvitricongviecs" EntityType="QuanlynhansuModel.tblvitricongviec" />
+          <AssociationSet Name="FK__tblvitric__FK_Bo__1AD3FDA4" Association="QuanlynhansuModel.FK__tblvitric__FK_Bo__1AD3FDA4">
+            <End Role="tblbophan" EntitySet="tblbophans" />
+            <End Role="tblvitricongviec" EntitySet="tblvitricongviecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblchungc__FK_Nh__30C33EC3" Association="QuanlynhansuModel.FK__tblchungc__FK_Nh__30C33EC3">
+            <End Role="tblnhanvien" EntitySet="tblnhanviens" />
+            <End Role="tblchungchi1" EntitySet="tblchungchis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblnhanvi__FK_VC__1DB06A4F" Association="QuanlynhansuModel.FK__tblnhanvi__FK_VC__1DB06A4F">
+            <End Role="tblvitricongviec" EntitySet="tblvitricongviecs" />
+            <End Role="tblnhanvien" EntitySet="tblnhanviens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbltaikho__FK_Nh__2739D489" Association="QuanlynhansuModel.FK__tbltaikho__FK_Nh__2739D489">
+            <End Role="tblnhanvien" EntitySet="tblnhanviens" />
+            <End Role="tbltaikhoan" EntitySet="tbltaikhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbltaikho__FK_Qu__282DF8C2" Association="QuanlynhansuModel.FK__tbltaikho__FK_Qu__282DF8C2">
+            <End Role="tblquyen" EntitySet="tblquyens" />
+            <End Role="tbltaikhoan" EntitySet="tbltaikhoans" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblbophan">
+          <Key>
+            <PropertyRef Name="PK_BoPhan_iMaBoPhan" />
+          </Key>
+          <Property Name="PK_BoPhan_iMaBoPhan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoPhan_sTenBoPhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblvitricongviecs" Relationship="QuanlynhansuModel.FK__tblvitric__FK_Bo__1AD3FDA4" FromRole="tblbophan" ToRole="tblvitricongviec" />
+        </EntityType>
+        <EntityType Name="tblchungchi">
+          <Key>
+            <PropertyRef Name="PK_ChungChi_iMaCC" />
+          </Key>
+          <Property Name="PK_ChungChi_iMaCC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChungChi_sTenChungChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChungChi_dNgayBD" Type="DateTime" Precision="0" />
+          <Property Name="ChungChi_dNgayKT" Type="DateTime" Precision="0" />
+          <Property Name="ChungChi_sTepDinhKem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FK_NhanVien_iIDNhanVien" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblnhanvien" Relationship="QuanlynhansuModel.FK__tblchungc__FK_Nh__30C33EC3" FromRole="tblchungchi1" ToRole="tblnhanvien" />
+        </EntityType>
+        <EntityType Name="tblquyen">
+          <Key>
+            <PropertyRef Name="PK_Quyen_iId" />
+          </Key>
+          <Property Name="PK_Quyen_iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quyen_sTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbltaikhoans" Relationship="QuanlynhansuModel.FK__tbltaikho__FK_Qu__282DF8C2" FromRole="tblquyen" ToRole="tbltaikhoan" />
+        </EntityType>
+        <EntityType Name="tbltaikhoan">
+          <Key>
+            <PropertyRef Name="PK_TaiKhoan_iId" />
+          </Key>
+          <Property Name="PK_TaiKhoan_iId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaiKhoan_sTen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaiKhoan_sMatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaiKhoan_sTrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaiKhoan_sThoiGianCap" Type="DateTime" Precision="0" />
+          <Property Name="FK_NhanVien_iId" Type="Int32" />
+          <Property Name="FK_Quyen_iId" Type="Int32" />
+          <NavigationProperty Name="tblnhanvien" Relationship="QuanlynhansuModel.FK__tbltaikho__FK_Nh__2739D489" FromRole="tbltaikhoan" ToRole="tblnhanvien" />
+          <NavigationProperty Name="tblquyen" Relationship="QuanlynhansuModel.FK__tbltaikho__FK_Qu__282DF8C2" FromRole="tbltaikhoan" ToRole="tblquyen" />
+        </EntityType>
+        <EntityType Name="tblvitricongviec">
+          <Key>
+            <PropertyRef Name="PK_VCCV_iMaVCCV" />
+          </Key>
+          <Property Name="PK_VCCV_iMaVCCV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VCCV_sTenVCCV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VCCV_sMoTaVCCV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_BoPhan_MaBP" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblbophan" Relationship="QuanlynhansuModel.FK__tblvitric__FK_Bo__1AD3FDA4" FromRole="tblvitricongviec" ToRole="tblbophan" />
+          <NavigationProperty Name="tblnhanviens" Relationship="QuanlynhansuModel.FK__tblnhanvi__FK_VC__1DB06A4F" FromRole="tblvitricongviec" ToRole="tblnhanvien" />
+        </EntityType>
+        <Association Name="FK__tblvitric__FK_Bo__1AD3FDA4">
+          <End Type="QuanlynhansuModel.tblbophan" Role="tblbophan" Multiplicity="1" />
+          <End Type="QuanlynhansuModel.tblvitricongviec" Role="tblvitricongviec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblbophan">
+              <PropertyRef Name="PK_BoPhan_iMaBoPhan" />
+            </Principal>
+            <Dependent Role="tblvitricongviec">
+              <PropertyRef Name="FK_BoPhan_MaBP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblchungc__FK_Nh__30C33EC3">
+          <End Type="QuanlynhansuModel.tblnhanvien" Role="tblnhanvien" Multiplicity="1" />
+          <End Type="QuanlynhansuModel.tblchungchi" Role="tblchungchi1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tblchungchi1">
+              <PropertyRef Name="FK_NhanVien_iIDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblnhanvi__FK_VC__1DB06A4F">
+          <End Type="QuanlynhansuModel.tblvitricongviec" Role="tblvitricongviec" Multiplicity="1" />
+          <End Type="QuanlynhansuModel.tblnhanvien" Role="tblnhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblvitricongviec">
+              <PropertyRef Name="PK_VCCV_iMaVCCV" />
+            </Principal>
+            <Dependent Role="tblnhanvien">
+              <PropertyRef Name="FK_VCCV_iMaVCCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbltaikho__FK_Nh__2739D489">
+          <End Type="QuanlynhansuModel.tblnhanvien" Role="tblnhanvien" Multiplicity="0..1" />
+          <End Type="QuanlynhansuModel.tbltaikhoan" Role="tbltaikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblnhanvien">
+              <PropertyRef Name="PK_iIdNhanVien" />
+            </Principal>
+            <Dependent Role="tbltaikhoan">
+              <PropertyRef Name="FK_NhanVien_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbltaikho__FK_Qu__282DF8C2">
+          <End Type="QuanlynhansuModel.tblquyen" Role="tblquyen" Multiplicity="0..1" />
+          <End Type="QuanlynhansuModel.tbltaikhoan" Role="tbltaikhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblquyen">
+              <PropertyRef Name="PK_Quyen_iId" />
+            </Principal>
+            <Dependent Role="tbltaikhoan">
+              <PropertyRef Name="FK_Quyen_iId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanlynhansuModelStoreContainer" CdmEntityContainer="QuanlynhansuEntities2">
+          <EntitySetMapping Name="tblkhenthuong_kyluat">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblkhenthuong_kyluat">
+              <MappingFragment StoreEntitySet="tblkhenthuong_kyluat">
+                <ScalarProperty Name="PK_KTKL_iId" ColumnName="PK_KTKL_iId" />
+                <ScalarProperty Name="KTKL_sTieuDe" ColumnName="KTKL_sTieuDe" />
+                <ScalarProperty Name="KTKL_dThoiGianLap" ColumnName="KTKL_dThoiGianLap" />
+                <ScalarProperty Name="KTKL_dThoiGianDuyet" ColumnName="KTKL_dThoiGianDuyet" />
+                <ScalarProperty Name="KTKL_iKinhPhi" ColumnName="KTKL_iKinhPhi" />
+                <ScalarProperty Name="KTKL_sGhiChu" ColumnName="KTKL_sGhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblnhanviens">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblnhanvien">
+              <MappingFragment StoreEntitySet="tblnhanvien">
+                <ScalarProperty Name="PK_iIdNhanVien" ColumnName="PK_iIdNhanVien" />
+                <ScalarProperty Name="NhanVien_sHoVaTen" ColumnName="NhanVien_sHoVaTen" />
+                <ScalarProperty Name="NhanVien_sNgaySinh" ColumnName="NhanVien_sNgaySinh" />
+                <ScalarProperty Name="NhanVien_sGioiTinh" ColumnName="NhanVien_sGioiTinh" />
+                <ScalarProperty Name="NhanVien_sDiaChi" ColumnName="NhanVien_sDiaChi" />
+                <ScalarProperty Name="NhanVien_sDienThoai" ColumnName="NhanVien_sDienThoai" />
+                <ScalarProperty Name="NhanVien_sBangCap" ColumnName="NhanVien_sBangCap" />
+                <ScalarProperty Name="NhanVien_sCMT" ColumnName="NhanVien_sCMT" />
+                <ScalarProperty Name="FK_VCCV_iMaVCCV" ColumnName="FK_VCCV_iMaVCCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblnhanvien_khenthuong_kyluat">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblnhanvien_khenthuong_kyluat">
+              <MappingFragment StoreEntitySet="tblnhanvien_khenthuong_kyluat">
+                <ScalarProperty Name="PK_NV_KTKL_iId" ColumnName="PK_NV_KTKL_iId" />
+                <ScalarProperty Name="FK_NhanVien_iId" ColumnName="FK_NhanVien_iId" />
+                <ScalarProperty Name="FK_KTKL_iId" ColumnName="FK_KTKL_iId" />
+                <ScalarProperty Name="NVKTKL_sNoiDung" ColumnName="NVKTKL_sNoiDung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblbophans">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblbophan">
+              <MappingFragment StoreEntitySet="tblbophan">
+                <ScalarProperty Name="BoPhan_sTenBoPhan" ColumnName="BoPhan_sTenBoPhan" />
+                <ScalarProperty Name="PK_BoPhan_iMaBoPhan" ColumnName="PK_BoPhan_iMaBoPhan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblchungchis">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblchungchi">
+              <MappingFragment StoreEntitySet="tblchungchi">
+                <ScalarProperty Name="FK_NhanVien_iIDNhanVien" ColumnName="FK_NhanVien_iIDNhanVien" />
+                <ScalarProperty Name="ChungChi_sTepDinhKem" ColumnName="ChungChi_sTepDinhKem" />
+                <ScalarProperty Name="ChungChi_dNgayKT" ColumnName="ChungChi_dNgayKT" />
+                <ScalarProperty Name="ChungChi_dNgayBD" ColumnName="ChungChi_dNgayBD" />
+                <ScalarProperty Name="ChungChi_sTenChungChi" ColumnName="ChungChi_sTenChungChi" />
+                <ScalarProperty Name="PK_ChungChi_iMaCC" ColumnName="PK_ChungChi_iMaCC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblquyens">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblquyen">
+              <MappingFragment StoreEntitySet="tblquyen">
+                <ScalarProperty Name="Quyen_sTen" ColumnName="Quyen_sTen" />
+                <ScalarProperty Name="PK_Quyen_iId" ColumnName="PK_Quyen_iId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbltaikhoans">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tbltaikhoan">
+              <MappingFragment StoreEntitySet="tbltaikhoan">
+                <ScalarProperty Name="FK_Quyen_iId" ColumnName="FK_Quyen_iId" />
+                <ScalarProperty Name="FK_NhanVien_iId" ColumnName="FK_NhanVien_iId" />
+                <ScalarProperty Name="TaiKhoan_sThoiGianCap" ColumnName="TaiKhoan_sThoiGianCap" />
+                <ScalarProperty Name="TaiKhoan_sTrangThai" ColumnName="TaiKhoan_sTrangThai" />
+                <ScalarProperty Name="TaiKhoan_sMatKhau" ColumnName="TaiKhoan_sMatKhau" />
+                <ScalarProperty Name="TaiKhoan_sTen" ColumnName="TaiKhoan_sTen" />
+                <ScalarProperty Name="PK_TaiKhoan_iId" ColumnName="PK_TaiKhoan_iId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblvitricongviecs">
+            <EntityTypeMapping TypeName="QuanlynhansuModel.tblvitricongviec">
+              <MappingFragment StoreEntitySet="tblvitricongviec">
+                <ScalarProperty Name="FK_BoPhan_MaBP" ColumnName="FK_BoPhan_MaBP" />
+                <ScalarProperty Name="VCCV_sMoTaVCCV" ColumnName="VCCV_sMoTaVCCV" />
+                <ScalarProperty Name="VCCV_sTenVCCV" ColumnName="VCCV_sTenVCCV" />
+                <ScalarProperty Name="PK_VCCV_iMaVCCV" ColumnName="PK_VCCV_iMaVCCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

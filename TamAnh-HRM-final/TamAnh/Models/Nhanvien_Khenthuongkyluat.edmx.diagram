@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ae817e3bcca4fd4bb377ea1eccb761b" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblkhenthuong_kyluat" Width="2.25" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblnhanvien" Width="1.5" PointX="5.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblnhanvien_khenthuong_kyluat" Width="1.5" PointX="3.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tblnhanvi__FK_KT__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tblnhanvi__FK_Nh__2CF2ADDF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblbophan" Width="1.5" PointX="0.875" PointY="8.375" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblchungchi" Width="1.5" PointX="7.625" PointY="7.5" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblquyen" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tbltaikhoan" Width="1.5" PointX="8" PointY="0.625" />
+        <EntityTypeShape EntityType="QuanlynhansuModel.tblvitricongviec" Width="1.5" PointX="3.125" PointY="8" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tblvitric__FK_Bo__1AD3FDA4" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tblchungc__FK_Nh__30C33EC3" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tblnhanvi__FK_VC__1DB06A4F" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tbltaikho__FK_Nh__2739D489" />
+        <AssociationConnector Association="QuanlynhansuModel.FK__tbltaikho__FK_Qu__282DF8C2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
