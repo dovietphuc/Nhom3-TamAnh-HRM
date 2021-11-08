@@ -37,7 +37,7 @@ namespace TamAnh.Controllers
             
             SqlConnection myCnn = db.getConnection();
             myCnn.Open();
-            SqlCommand cmd = new SqlCommand("Select * from tbltaikhoan where TaiKhoan_sTen = @user AND TaiKhoan_sMatKhau = @pass", myCnn);
+            SqlCommand cmd = new SqlCommand("Select * from tbltaikhoan JOIN tblnhanvien ON tbltaikhoan.FK_NhanVien_iId = tblnhanvien.PK_iIdNhanVien where TaiKhoan_sTen = @user AND TaiKhoan_sMatKhau = @pass", myCnn);
             //FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1")
             cmd.Parameters.AddWithValue("@user", username);
             cmd.Parameters.AddWithValue("@pass", password);
@@ -46,7 +46,8 @@ namespace TamAnh.Controllers
             {
                 if (data.Read())
                 {
-                    Session["username"] = "Nguyễn Minh Cường";
+                    Session["username"] = data["NhanVien_sHoVaTen"];
+                    Session["user_id"] = data["PK_iIdNhanVien"];
                     return RedirectToAction("../Home");
                 }
                 else
@@ -61,6 +62,7 @@ namespace TamAnh.Controllers
         public ActionResult Logout()
         {
             Session.Remove("username");
+            Session.Remove("user_id");
             return RedirectToAction("Index");
         }
 

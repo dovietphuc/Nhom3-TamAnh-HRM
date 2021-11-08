@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Tiêu đề</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.KTKL_sTieuDe, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Thời gian lập</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { type = "date", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.KTKL_dThoiGianLap, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Thời gian duyệt</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { type = "date", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.KTKL_dThoiGianDuyet, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Kinh phí</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.KTKL_iKinhPhi, "", new { @class = "text-danger" })
                     </div>
                 </div>

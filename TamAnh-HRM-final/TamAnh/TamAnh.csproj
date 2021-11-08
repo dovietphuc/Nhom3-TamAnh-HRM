@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentManager</RootNamespace>
-    <AssemblyName>StudentManager</AssemblyName>
+    <RootNamespace>TamAnh</RootNamespace>
+    <AssemblyName>TamAnh</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -45,12 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -121,24 +128,64 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ChuyenViTriCongViecController.cs" />
-    <Compile Include="Areas\Admin\Controllers\KhenThuongKyLuatController.cs" />
-    <Compile Include="Areas\Admin\Controllers\QuanLyChungChiController.cs" />
-    <Compile Include="Areas\Admin\Controllers\QuanLyHopDongController.cs" />
-    <Compile Include="Areas\Admin\Controllers\QuanLyNhanVienController.cs" />
-    <Compile Include="Areas\Admin\Models\Chungchi.cs" />
-    <Compile Include="Areas\Admin\Models\DBConnection.cs" />
-    <Compile Include="Areas\Admin\Models\HopDong.cs" />
-    <Compile Include="Areas\Admin\Models\HopDong_NhanVien_Model.cs" />
-    <Compile Include="Areas\Admin\Models\Khenthuongkyluat.cs" />
-    <Compile Include="Areas\Admin\Models\NhanVien.cs" />
-    <Compile Include="Areas\Admin\Models\NhanVien_VTCV_Model.cs" />
-    <Compile Include="Areas\Admin\Models\QuyetDinhThuyenChuyen.cs" />
-    <Compile Include="Areas\Admin\Models\QuyetDinh_VTCV_NhanVien_Model.cs" />
-    <Compile Include="Areas\Admin\Models\ViTriCongViec.cs" />
+    <Compile Include="Controllers\ChuyenViTriCongViecController.cs" />
+    <Compile Include="Controllers\QuanLyHopDongController.cs" />
+    <Compile Include="Controllers\QuanLyNhanVienController.cs" />
+    <Compile Include="Models\HopDong.cs" />
+    <Compile Include="Models\HopDong_NhanVien_Model.cs" />
+    <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhanVien_VTCV_Model.cs" />
+    <Compile Include="Models\QuyetDinhThuyenChuyen.cs" />
+    <Compile Include="Models\QuyetDinh_VTCV_NhanVien_Model.cs" />
+    <Compile Include="Models\ViTriCongViec.cs" />
+    <Compile Include="Content\tblnhanvien_khenthuong_kyluatController.cs" />
+    <Compile Include="Controllers\DM_KTKLController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NV_CCController.cs" />
+    <Compile Include="Controllers\NV_KTKLController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBConnection.cs" />
+    <Compile Include="Models\Nhanvien_Khenthuongkyluat.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nhanvien_Khenthuongkyluat.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nhanvien_Khenthuongkyluat.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nhanvien_Khenthuongkyluat.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nhanvien_Khenthuongkyluat.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblbophan.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblchungchi.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblkhenthuong_kyluat.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblnhanvien.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblnhanvien_khenthuong_kyluat.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblquyen.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbltaikhoan.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblvitricongviec.cs">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,25 +201,36 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="Models\Nhanvien_Khenthuongkyluat.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Nhanvien_Khenthuongkyluat.Context.cs</LastGenOutput>
+      <DependentUpon>Nhanvien_Khenthuongkyluat.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Nhanvien_Khenthuongkyluat.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Nhanvien_Khenthuongkyluat.edmx</DependentUpon>
+      <LastGenOutput>Nhanvien_Khenthuongkyluat.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyChungChi\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyChungChi\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyChungChi\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\KhenThuongKyLuat\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\KhenThuongKyLuat\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\KhenThuongKyLuat\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyHopDong\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyHopDong\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Create.cshtml" />
+    <Content Include="Views\QuanLyHopDong\Index.cshtml" />
+    <Content Include="Views\QuanLyHopDong\Create.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\Index.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\Edit.cshtml" />
+    <Content Include="Views\QuanLyNhanVien\Create.cshtml" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
-    <Content Include="Areas\Admin\Views\ChuyenViTriCongViec\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ChuyenViTriCongViec\Create.cshtml" />
+    <Content Include="Views\ChuyenViTriCongViec\Index.cshtml" />
+    <Content Include="Views\ChuyenViTriCongViec\Create.cshtml" />
+    <EntityDeploy Include="Models\Nhanvien_Khenthuongkyluat.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Nhanvien_Khenthuongkyluat.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Nhanvien_Khenthuongkyluat.edmx.diagram">
+      <DependentUpon>Nhanvien_Khenthuongkyluat.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -199,13 +257,25 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\DM_KTKL\Create.cshtml" />
+    <Content Include="Views\DM_KTKL\Edit.cshtml" />
+    <Content Include="Views\DM_KTKL\Index.cshtml" />
+    <Content Include="Views\NV_KTKL\Create.cshtml" />
+    <Content Include="Views\NV_KTKL\Edit.cshtml" />
+    <Content Include="Views\NV_KTKL\Index.cshtml" />
+    <Content Include="Views\NV_CC\Create.cshtml" />
+    <Content Include="Views\NV_CC\Edit.cshtml" />
+    <Content Include="Views\NV_CC\Index.cshtml" />
+    <Content Include="Views\Shared\NoPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -219,6 +289,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

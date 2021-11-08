@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace StudentManager.Areas.Admin.Models
+namespace TamAnh.Models
 {
     public class QuyetDinhThuyenChuyen
     {
@@ -195,9 +195,8 @@ namespace StudentManager.Areas.Admin.Models
             return i > 0;
         }
 
-        public bool aproved(int ID)
+        public bool aproved(QuyetDinhThuyenChuyen quyetDinh)
         {
-            QuyetDinhThuyenChuyen quyetDinh = get(ID).FirstOrDefault();
             ListNhanVien listNhanVien = new ListNhanVien();
             NhanVien nv = listNhanVien.get(quyetDinh.iMaNVLap).FirstOrDefault();
             nv.iMaVTCV = quyetDinh.iMaVTCV_Moi;
@@ -205,13 +204,16 @@ namespace StudentManager.Areas.Admin.Models
 
             if (success)
             {
-                string sql = "UPDATE tblquyetdinhchuyen_vtcongviec SET [QĐCVTCV_dTrangThai] = " + STATE_APPROVED + ", [QĐCVTCV_dThoigianduyet] = @thoiGianDuyet WHERE [PK_QĐCVTCV_iId] = @id";
+                string sql = "UPDATE tblquyetdinhchuyen_vtcongviec SET [QĐCVTCV_dTrangThai] = " + STATE_APPROVED 
+                    + ", [QĐCVTCV_dThoigianduyet] = @thoiGianDuyet, [FK_NhanVien_iMaNhanVienDuyet] = @nguoiDuyet"
+                    + " WHERE [PK_QĐCVTCV_iId] = @id";
                 SqlConnection con = db.getConnection();
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@thoiGianDuyet", DateTime.Now);
-                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@nguoiDuyet", quyetDinh.iMaNVDuyet);
+                cmd.Parameters.AddWithValue("@id", quyetDinh.ID);
                 con.Open();
                 int i = cmd.ExecuteNonQuery();
                 con.Close();
@@ -224,13 +226,18 @@ namespace StudentManager.Areas.Admin.Models
             }
         }
 
-        public bool notAproved(int ID)
+        public bool notAproved(QuyetDinhThuyenChuyen quyetDinh)
         {
-            string sql = "UPDATE tblquyetdinhchuyen_vtcongviec SET [QĐCVTCV_dTrangThai] = " + STATE_NOT_APPROVED + " WHERE [PK_QĐCVTCV_iId] = " + ID;
+            string sql = "UPDATE tblquyetdinhchuyen_vtcongviec SET [QĐCVTCV_dTrangThai] = " + STATE_NOT_APPROVED
+                                + ", [QĐCVTCV_dThoigianduyet] = @thoiGianDuyet, [FK_NhanVien_iMaNhanVienDuyet] = @nguoiDuyet"
+                                + " WHERE [PK_QĐCVTCV_iId] = @id"; 
             SqlConnection con = db.getConnection();
 
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@thoiGianDuyet", DateTime.Now);
+            cmd.Parameters.AddWithValue("@nguoiDuyet", quyetDinh.iMaNVDuyet);
+            cmd.Parameters.AddWithValue("@id", quyetDinh.ID);
             con.Open();
             int i = cmd.ExecuteNonQuery();
             con.Close();

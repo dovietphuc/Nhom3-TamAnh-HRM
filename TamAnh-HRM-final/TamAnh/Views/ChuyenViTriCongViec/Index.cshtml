@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudentManager.Areas.Admin.Models.QuyetDinhThuyenChuyen>
+﻿@model IEnumerable<TamAnh.Models.QuyetDinhThuyenChuyen>
 
 @{
     ViewBag.Title = "Index";
@@ -83,21 +83,21 @@
                 </td>
                 <td class="text-center">
 
-                    @if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
+                    @if (item.iTrangThai == TamAnh.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
                     {
                         <span class="state">Chờ duyệt</span>
                     }
-                    else if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_APPROVED)
+                    else if (item.iTrangThai == TamAnh.Models.ListQuyetDinhThuyenChuyen.STATE_APPROVED)
                     {
                         <span class="state">Đã duyệt</span>
                     }
-                    else if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_NOT_APPROVED)
+                    else if (item.iTrangThai == TamAnh.Models.ListQuyetDinhThuyenChuyen.STATE_NOT_APPROVED)
                     {
                         <span class="state">Không duyệt</span>
                     }
                 </td>
                 <td class="text-center">
-                    @if (item.iTrangThai == StudentManager.Areas.Admin.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
+                    @if (item.iTrangThai == TamAnh.Models.ListQuyetDinhThuyenChuyen.STATE_WAITING)
                     {
                         <a href="@Url.Action("Aproved", "ChuyenViTriCongViec", new { id = item.ID })" class="btn btn-sm btn-primary aproved"><i class="fas fa-check"></i></a>
                         <a href="@Url.Action("NotAproved", "ChuyenViTriCongViec", new { id = item.ID })" class="btn btn-sm btn-danger not-aproved"><i class="fas fa-times"></i></a>

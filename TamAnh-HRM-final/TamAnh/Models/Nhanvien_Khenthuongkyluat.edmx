@@ -41,7 +41,7 @@
           <Property Name="PK_iIdNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NhanVien_sHoVaTen" Type="nvarchar" MaxLength="50" />
           <Property Name="NhanVien_sNgaySinh" Type="datetime" Nullable="false" />
-          <Property Name="NhanVien_sGioiTinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="NhanVien_bGioiTinh" Type="bit" />
           <Property Name="NhanVien_sDiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="NhanVien_sDienThoai" Type="nvarchar" MaxLength="50" />
           <Property Name="NhanVien_sBangCap" Type="nvarchar" MaxLength="50" />
@@ -230,7 +230,7 @@
           <Property Name="PK_iIdNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NhanVien_sHoVaTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NhanVien_sNgaySinh" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NhanVien_sGioiTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NhanVien_bGioiTinh" Type="Boolean" />
           <Property Name="NhanVien_sDiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NhanVien_sDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NhanVien_sBangCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -451,7 +451,7 @@
                 <ScalarProperty Name="PK_iIdNhanVien" ColumnName="PK_iIdNhanVien" />
                 <ScalarProperty Name="NhanVien_sHoVaTen" ColumnName="NhanVien_sHoVaTen" />
                 <ScalarProperty Name="NhanVien_sNgaySinh" ColumnName="NhanVien_sNgaySinh" />
-                <ScalarProperty Name="NhanVien_sGioiTinh" ColumnName="NhanVien_sGioiTinh" />
+                <ScalarProperty Name="NhanVien_bGioiTinh" ColumnName="NhanVien_bGioiTinh" />
                 <ScalarProperty Name="NhanVien_sDiaChi" ColumnName="NhanVien_sDiaChi" />
                 <ScalarProperty Name="NhanVien_sDienThoai" ColumnName="NhanVien_sDienThoai" />
                 <ScalarProperty Name="NhanVien_sBangCap" ColumnName="NhanVien_sBangCap" />

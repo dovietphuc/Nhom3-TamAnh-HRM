@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace StudentManager.Areas.Admin.Models
+namespace TamAnh.Models
 {
     public class NhanVien
     {
@@ -82,7 +82,7 @@ namespace StudentManager.Areas.Admin.Models
                 nhanVien.ID = Convert.ToInt32(dt.Rows[i]["PK_iIdNhanVien"].ToString());
                 nhanVien.sTenNhanVien = dt.Rows[i]["NhanVien_sHoVaTen"].ToString();
                 nhanVien.dNgaySinh = (DateTime)dt.Rows[i]["NhanVien_sNgaySinh"];
-                nhanVien.bGioiTinh = Boolean.Parse(dt.Rows[i]["NhanVien_sGioiTinh"].ToString());
+                nhanVien.bGioiTinh = Boolean.Parse(dt.Rows[i]["NhanVien_bGioiTinh"].ToString());
                 nhanVien.sDiaChi = dt.Rows[i]["NhanVien_sDiaChi"].ToString();
                 nhanVien.sDienThoai = dt.Rows[i]["NhanVien_sDienThoai"].ToString();
                 nhanVien.sBangCap = dt.Rows[i]["NhanVien_sBangCap"].ToString();
@@ -101,7 +101,7 @@ namespace StudentManager.Areas.Admin.Models
             string sql = "INSERT INTO [dbo].[tblnhanvien] " +
                 "([NhanVien_sHoVaTen]" +
                 ",[NhanVien_sNgaySinh]" +
-                ",[NhanVien_sGioiTinh]" +
+                ",[NhanVien_bGioiTinh]" +
                 ",[NhanVien_sDiaChi]" +
                 ",[NhanVien_sDienThoai]" +
                 ",[NhanVien_sBangCap]" +
@@ -140,7 +140,7 @@ namespace StudentManager.Areas.Admin.Models
             string sql = "UPDATE [dbo].[tblnhanvien]"
                         + " SET [NhanVien_sHoVaTen] = @HoTen"
                          + ",[NhanVien_sNgaySinh] = @NgaySinh"
-                         + ",[NhanVien_sGioiTinh] = @GioiTinh"
+                         + ",[NhanVien_bGioiTinh] = @GioiTinh"
                          + ",[NhanVien_sDiaChi] = @DiaChi"
                          + ",[NhanVien_sDienThoai] = @DienThoai"
                          + ",[NhanVien_sBangCap] = @BangCap"

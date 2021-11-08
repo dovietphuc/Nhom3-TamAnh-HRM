@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Nội dung</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.NVKTKL_sNoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.NVKTKL_sNoiDung, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                     @Html.ValidationMessageFor(model => model.NVKTKL_sNoiDung, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -50,7 +50,7 @@
         }
 
         <div>
-            <a href="@Url.Action("Index", "tblnhanvien_khenthuong_kyluat")" class="btn btn-sm btn-primary"> Quay lại</a>
+            <a href="@Url.Action("Index", "NV_KTKL")" class="btn btn-sm btn-primary"> Quay lại</a>
         </div>
     </div>
 </div>

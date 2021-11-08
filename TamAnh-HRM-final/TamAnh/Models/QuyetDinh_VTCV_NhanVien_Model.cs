@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StudentManager.Areas.Admin.Models
+namespace TamAnh.Models
 {
     public class QuyetDinh_VTCV_NhanVien_Model
     {

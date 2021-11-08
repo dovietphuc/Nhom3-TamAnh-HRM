@@ -104,7 +104,7 @@ CREATE TABLE [dbo].[tblnhanvien](
 	[PK_iIdNhanVien] [int] IDENTITY(1,1) NOT NULL,
 	[NhanVien_sHoVaTen] [nvarchar](50) NULL,
 	[NhanVien_sNgaySinh] [datetime] NULL,
-	[NhanVien_sGioiTinh] [bit] NULL,
+	[NhanVien_bGioiTinh] [bit] NULL,
 	[NhanVien_sDiaChi] [nvarchar](50) NULL,
 	[NhanVien_sDienThoai] [nvarchar](50) NULL,
 	[NhanVien_sBangCap] [nvarchar](50) NULL,
@@ -161,25 +161,17 @@ GO
 USE [Quanlynhansu]
 GO
 
-/****** Object:  Table [dbo].[tbl_chungchi]    Script Date: 11/5/2021 10:02:19 PM ******/
-SET ANSI_NULLS ON
-GO
+------------------
 
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[tbl_chungchi](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[sTenchungchi] [nvarchar](100) NULL,
-	[dNgaybatdau] [char](10) NULL,
-	[dNgayketthuc] [char](10) NULL,
-	[sLinkdinhkem] [varchar](100) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+CREATE TABLE tblchungchi(
+	PK_ChungChi_iMaCC INT IDENTITY(1,1) PRIMARY KEY,
+	ChungChi_sTenChungChi NVARCHAR(50),
+	ChungChi_dNgayBD date,  -- chuyen datetime thanh date
+	ChungChi_dNgayKT date,  -- chuyen datetime thanh date
+	ChungChi_sTepDinhKem NVARCHAR(50),	
+	FK_NhanVien_iIDNhanVien int not null,
+	FOREIGN KEY (FK_NhanVien_iIDNhanVien) REFERENCES tblnhanvien(PK_iIdNhanVien),
+);
 
 USE [Quanlynhansu]
 GO
@@ -191,18 +183,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[tbl_khenthuongkyluat](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[sTieude] [nvarchar](200) NULL,
-	[dThoigianlap] [char](10) NULL,
-	[dThoigianduyet] [char](10) NULL,
-	[iKinhphi] [int] NULL,
-	[sGhichu] [nvarchar](200) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+-- 11 --
+CREATE TABLE tblkhenthuong_kyluat(
+	PK_KTKL_iId INT IDENTITY(1,1) PRIMARY KEY,
+	KTKL_sTieuDe NVARCHAR(50),
+	KTKL_dThoiGianLap date, -- chuyen datetime thanh date
+	KTKL_dThoiGianDuyet date, -- chuyen datetime thanh date
+	KTKL_iKinhPhi INT,-- chuyen money thanh int, KTKL_mKinhPhi thanh KTKL_iKinhPhi
+	KTKL_sGhiChu NVARCHAR(50),
+)
+
 GO
 
 USE [Quanlynhansu]
@@ -252,4 +242,40 @@ GO
 
 ALTER TABLE [dbo].[tblquyetdinhchuyen_vtcongviec] CHECK CONSTRAINT [FK_tblquyetdinhchuyen_vtcongviec_tblvitricongviec1]
 GO
+
+-- 4
+CREATE TABLE tblquyen(
+	PK_Quyen_iId INT IDENTITY(1,1) PRIMARY KEY,
+	Quyen_sTen nvarchar(50),
+)
+
+GO
+
+--5
+CREATE TABLE tbltaikhoan(
+	PK_TaiKhoan_iId INT IDENTITY(1,1) PRIMARY KEY,
+	TaiKhoan_sTen varchar(50), -- chuyen tu nvarchar ve varchar
+	TaiKhoan_sMatKhau varchar(50), -- chuyen tu nvarchar ve varchar
+	TaiKhoan_sTrangThai nvarchar(50),
+	TaiKhoan_sThoiGianCap date, -- chuyen datetime thanh date
+	FK_NhanVien_iId int,
+	FK_Quyen_iId int,
+	FOREIGN KEY (FK_NhanVien_iId) REFERENCES tblnhanvien(PK_iIdNhanVien),
+	FOREIGN KEY (FK_Quyen_iId) REFERENCES tblquyen(PK_Quyen_iId),
+)
+
+GO
+
+-- 12 --
+CREATE TABLE tblnhanvien_khenthuong_kyluat(
+	PK_NV_KTKL_iId INT IDENTITY(1,1) PRIMARY KEY,
+	FK_NhanVien_iId int not null, -- thay PK_NhanVien_iId thanh FK_NhanVien_iId
+	FK_KTKL_iId int not null, -- thay PK_KTKL_iId thanh FK_KTKL_iId
+	NVKTKL_sNoiDung NVARCHAR(50), -- thay NVKTKL_NoiDung thanh NVKTKL_sNoiDung
+	FOREIGN KEY (FK_NhanVien_iId) REFERENCES tblnhanvien(PK_iIdNhanVien),
+	FOREIGN KEY (FK_KTKL_iId) REFERENCES tblkhenthuong_kyluat(PK_KTKL_iId),
+)
+
+GO
+
 

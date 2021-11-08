@@ -5,8 +5,9 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
+using TamAnh.Models;
 
-namespace StudentManager.Areas.Admin.Models
+namespace TamAnh.Models
 {
     public class HopDong
     {

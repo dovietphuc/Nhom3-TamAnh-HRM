@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace StudentManager.Areas.Admin.Models
+namespace TamAnh.Models
 {
     public class ViTriCongViec
     {
