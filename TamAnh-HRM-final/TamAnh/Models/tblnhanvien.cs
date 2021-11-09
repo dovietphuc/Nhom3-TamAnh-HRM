@@ -25,7 +25,7 @@ namespace TamAnh.Models
         public int PK_iIdNhanVien { get; set; }
         public string NhanVien_sHoVaTen { get; set; }
         public System.DateTime NhanVien_sNgaySinh { get; set; }
-        public bool NhanVien_bGioiTinh { get; set; }
+        public string NhanVien_sGioiTinh { get; set; }
         public string NhanVien_sDiaChi { get; set; }
         public string NhanVien_sDienThoai { get; set; }
         public string NhanVien_sBangCap { get; set; }

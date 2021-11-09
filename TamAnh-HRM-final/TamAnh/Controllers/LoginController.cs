@@ -46,12 +46,18 @@ namespace TamAnh.Controllers
             {
                 if (data.Read())
                 {
+                    if(data["TaiKhoan_sTrangThai"].ToString() == "Lock")
+                    {
+                        ViewBag.error = "Tài khoản đã bị khóa, vui lòng liên hệ quản trị viên";
+                        return View("Index");
+                    }
                     Session["username"] = data["NhanVien_sHoVaTen"];
                     Session["user_id"] = data["PK_iIdNhanVien"];
                     return RedirectToAction("../Home");
                 }
                 else
                 {
+                    ViewBag.focus = true;
                     ViewBag.error = "Tài khoản hoặc mật khẩu không chính xác";
                     return View("Index");
                 }

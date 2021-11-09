@@ -6,7 +6,7 @@
 }
 <br />
 <div class="panel panel-primary">
-    <div class="panel-heading"><strong>Tạo mới khen thưởng kỷ luật</strong></div>
+    <div class="panel-heading"><strong>Tạo mới danh mục khen thưởng kỷ luật</strong></div>
     <div class="panel-body">
 
         @using (Html.BeginForm())
@@ -15,34 +15,36 @@
 
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-md-2">Tiêu đề</label>
+                    <label class="control-label col-md-2">Tiêu đề <span class="note">*</span></label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control", id = "tieude" } })
                         @Html.ValidationMessageFor(model => model.KTKL_sTieuDe, "", new { @class = "text-danger" })
+                        <div class="notify" id="notifyTieude"></div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2">Thời gian lập</label>
+                    <label class="control-label col-md-2">Thời gian lập <span class="note">*</span></label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { type = "date", @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.KTKL_dThoiGianLap, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { type = "datetime-local", @class = "form-control", id = "tglap" } })
+                        <div class="notify" id="notifyTglap"></div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2">Thời gian duyệt</label>
+                    <label class="control-label col-md-2">Thời gian duyệt   <span class="note">*</span></label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { type = "date", @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.KTKL_dThoiGianDuyet, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { type = "datetime-local", @class = "form-control", id = "tgduyet" } })
+                        <div class="notify" id="notifyTgduyet">@ViewBag.errDate</div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2">Kinh phí</label>
+                    <label class="control-label col-md-2">Kinh phí <span class="note">*</span></label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control", id = "kinhphi" } })
                         @Html.ValidationMessageFor(model => model.KTKL_iKinhPhi, "", new { @class = "text-danger" })
+                        <div class="notify" id="notifyKinhphi"></div>
                     </div>
                 </div>
 
@@ -56,17 +58,112 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Tạo mới" class="btn btn-default" />
+                        <input type="submit" value="Tạo mới" class="btn btn-default" id="submitFrm"/>
                     </div>
                 </div>
             </div>
         }
 
         <div>
-            <a href="@Url.Action("Index", "NV_KTKL")" class="btn btn-sm btn-primary"> Quay lại</a>
+            <a href="@Url.Action("Index", "DM_KTKL")" class="btn btn-sm btn-primary"> Quay lại</a>
         </div>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        const tieude = document.getElementById("tieude");
+        const kinhphi = document.getElementById("kinhphi");
+        const tglap = document.getElementById("tglap");
+        const tgduyet = document.getElementById("tgduyet");
+
+        const notifyTieude = document.getElementById("notifyTieude");
+        const notifyTgLap = document.getElementById("notifyTglap");
+        const notifyTgduyet = document.getElementById("notifyTgduyet");
+        const notifyKinhphi = document.getElementById("notifyKinhphi");
+
+        document.getElementById("submitFrm").onclick = function (e) {
+            let isValidData = true;
+            let isFocus = false;
+            resetNotify();
+            resetError();
+            if (tieude.value.length == 0) {
+                notifyTieude.innerText = "Vui lòng nhập tiêu đề";
+                tieude.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tieude.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tglap.value.length == 0) {
+                notifyTgLap.innerText = "Vui lòng nhập thời gian lập";
+                tglap.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tglap.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tglap.value.length > 16) {
+                notifyTgLap.innerText = "Ngày lập không hợp lệ";
+                tglap.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tglap.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tgduyet.value.length == 0) {
+                notifyTgduyet.innerText = "Vui lòng nhập thời gian duyệt";
+                tgduyet.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tgduyet.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tgduyet.value.length > 16) {
+                notifyTgduyet.innerText = "Ngày duyệt không hợp lệ";
+                tgduyet.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tgduyet.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (kinhphi.value.length == 0) {
+                notifyKinhphi.innerText = "Vui lòng nhập kinh phí";
+                kinhphi.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    kinhphi.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (parseInt(kinhphi.value) < 0) {
+                notifyKinhphi.innerText = "Kinh phí phải là giá trị dương";
+                kinhphi.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    kinhphi.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (isValidData)
+                return confirm("Bạn có muốn tạo mới bản ghi không?");
+            else
+                return false;
+        };
+    }
+
+    function resetNotify() {
+        let listNotify = document.getElementsByClassName("notify");
+        for (let i = 0; i < listNotify.length; ++i) {
+            listNotify[i].innerText = "";
+        }
+    }
+
+    function resetError() {
+        tieude.parentElement.classList.remove("has-error");
+        tglap.parentElement.classList.remove("has-error");
+        tgduyet.parentElement.classList.remove("has-error");
+        kinhphi.parentElement.classList.remove("has-error");
+    }
+</script>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -20,39 +20,41 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.PK_KTKL_iId)
             <div class="form-group">
-                @Html.LabelFor(model => model.KTKL_sTieuDe, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Tiêu đề <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.KTKL_sTieuDe, new { htmlAttributes = new { @class = "form-control", id = "tieude" } })
                     @Html.ValidationMessageFor(model => model.KTKL_sTieuDe, "", new { @class = "text-danger" })
+                    <div class="notify" id="notifyTieude"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.KTKL_dThoiGianLap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Thời gian lập <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.KTKL_dThoiGianLap, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.KTKL_dThoiGianLap, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control", id = "tglap" } })
+                    <div class="notify" id="notifyTglap"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.KTKL_dThoiGianDuyet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Thời gian duyệt <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.KTKL_dThoiGianDuyet, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.KTKL_dThoiGianDuyet, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control", id = "tgduyet" } })
+                    <div class="notify" id="notifyTgduyet">@ViewBag.errDate</div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.KTKL_iKinhPhi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Kinh phí <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.KTKL_iKinhPhi, new { htmlAttributes = new { @class = "form-control", id = "kinhphi" } })
                     @Html.ValidationMessageFor(model => model.KTKL_iKinhPhi, "", new { @class = "text-danger" })
+                    <div class="notify" id="notifyKinhphi"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.KTKL_sGhiChu, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Ghi chú</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.KTKL_sGhiChu, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.KTKL_sGhiChu, "", new { @class = "text-danger" })
@@ -61,7 +63,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Lưu lại" class="btn btn-default" />
+                    <input type="submit" value="Lưu lại" class="btn btn-default" id="submitFrm" />
                 </div>
             </div>
         }
@@ -71,6 +73,128 @@
         </div>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        // change date
+        let tglap1 = document.getElementById("tglap").getAttribute("value");
+        if (tglap1[4] != "-") {
+            var sp = tglap1.split(" ")
+            var sp2 = sp[0].split("/");
+            var sp3 = sp[1].substr(0, 5).split(":");
+            if (sp[2] == "PM")
+                sp3[0] = paserInt(sp3[0]) + 12;
+            var v = sp2[2] + "-" + sp2[1] + "-" + sp2[0] + "T" + sp3[0] + ":" + sp3[1];
+
+            document.getElementById("tglap").setAttribute("value", v);
+        }
+        
+
+        let tgduyet1 = document.getElementById("tgduyet").getAttribute("value");
+        if (tgduyet1[4] != "-") {
+            sp = tgduyet1.split(" ")
+            sp2 = sp[0].split("/");
+            sp3 = sp[1].substr(0, 5).split(":");
+            if (sp[2] == "PM")
+                sp3[0] = paserInt(sp3[0]) + 12;
+            v = sp2[2] + "-" + sp2[1] + "-" + sp2[0] + "T" + sp3[0] + ":" + sp3[1];
+
+            document.getElementById("tgduyet").setAttribute("value", v);
+        }
+
+        /////////////////////////////////////
+
+        const tieude = document.getElementById("tieude");
+        const kinhphi = document.getElementById("kinhphi");
+        const tglap = document.getElementById("tglap");
+        const tgduyet = document.getElementById("tgduyet");
+
+        const notifyTieude = document.getElementById("notifyTieude");
+        const notifyTgLap = document.getElementById("notifyTglap");
+        const notifyTgduyet = document.getElementById("notifyTgduyet");
+        const notifyKinhphi = document.getElementById("notifyKinhphi");
+
+        document.getElementById("submitFrm").onclick = function (e) {
+            let isValidData = true;
+            let isFocus = false;
+            resetNotify();
+            resetError();
+            if (tieude.value.length == 0) {
+                notifyTieude.innerText = "Vui lòng nhập tiêu đề";
+                tieude.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tieude.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tglap.value.length == 0) {
+                notifyTgLap.innerText = "Vui lòng nhập thời gian lập";
+                tglap.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tglap.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tglap.value.length > 16) {
+                notifyTgLap.innerText = "Ngày lập không hợp lệ";
+                tglap.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tglap.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tgduyet.value.length == 0) {
+                notifyTgduyet.innerText = "Vui lòng nhập thời gian duyệt";
+                tgduyet.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tgduyet.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tgduyet.value.length > 16) {
+                notifyTgduyet.innerText = "Ngày duyệt không hợp lệ";
+                tgduyet.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tgduyet.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (kinhphi.value.length == 0) {
+                notifyKinhphi.innerText = "Vui lòng nhập kinh phí";
+                kinhphi.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    kinhphi.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (parseInt(kinhphi.value) < 0) {
+                notifyKinhphi.innerText = "Kinh phí phải là giá trị dương";
+                kinhphi.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    kinhphi.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (isValidData)
+                return confirm("Bạn có muốn sửa bản ghi không?");
+            else
+                return false;
+        };
+    }
+
+    function resetNotify() {
+        let listNotify = document.getElementsByClassName("notify");
+        for (let i = 0; i < listNotify.length; ++i) {
+            listNotify[i].innerText = "";
+        }
+    }
+
+    function resetError() {
+        tieude.parentElement.classList.remove("has-error");
+        tglap.parentElement.classList.remove("has-error");
+        tgduyet.parentElement.classList.remove("has-error");
+        kinhphi.parentElement.classList.remove("has-error");
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
