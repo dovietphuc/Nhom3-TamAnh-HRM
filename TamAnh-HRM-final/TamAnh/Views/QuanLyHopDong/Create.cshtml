@@ -26,7 +26,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.HopDong.dNgayKy, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HopDong.dNgayKy, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.EditorFor(model => model.HopDong.dNgayKy, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                         @Html.ValidationMessageFor(model => model.HopDong.dNgayKy, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.HopDong.dNgayCoHieuLuc, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HopDong.dNgayCoHieuLuc, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.EditorFor(model => model.HopDong.dNgayCoHieuLuc, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                         @Html.ValidationMessageFor(model => model.HopDong.dNgayCoHieuLuc, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.HopDong.dNgayHetHan, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HopDong.dNgayHetHan, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.EditorFor(model => model.HopDong.dNgayHetHan, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                         @Html.ValidationMessageFor(model => model.HopDong.dNgayHetHan, "", new { @class = "text-danger" })
                     </div>
                 </div>

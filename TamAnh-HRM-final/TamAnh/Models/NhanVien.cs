@@ -18,6 +18,8 @@ namespace TamAnh.Models
 
         [Required(ErrorMessage = "Ngày sinh không được để trống")]
         [Display(Name = "Ngày sinh")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime dNgaySinh { set; get; }
 
         [Required(ErrorMessage = "Giới tính không được để trống")]
