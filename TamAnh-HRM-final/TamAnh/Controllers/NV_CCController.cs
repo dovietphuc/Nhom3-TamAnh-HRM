@@ -60,9 +60,14 @@ namespace TamAnh.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.tblchungchis.Add(tblchungchi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tblchungchi.ChungChi_dNgayKT <= tblchungchi.ChungChi_dNgayBD)
+                    ViewBag.errDate = "Ngày kết thúc phải lớn hơn ngày bắt đầu";
+                else
+                {
+                    db.tblchungchis.Add(tblchungchi);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.FK_NhanVien_iIDNhanVien = new SelectList(db.tblnhanviens, "PK_iIdNhanVien", "NhanVien_sHoVaTen", tblchungchi.FK_NhanVien_iIDNhanVien);
@@ -94,9 +99,14 @@ namespace TamAnh.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblchungchi).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tblchungchi.ChungChi_dNgayKT <= tblchungchi.ChungChi_dNgayBD)
+                    ViewBag.errDate = "Ngày kết thúc phải lớn hơn ngày bắt đầu";
+                else
+                {
+                    db.Entry(tblchungchi).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.FK_NhanVien_iIDNhanVien = new SelectList(db.tblnhanviens, "PK_iIdNhanVien", "NhanVien_sHoVaTen", tblchungchi.FK_NhanVien_iIDNhanVien);
             return View(tblchungchi);

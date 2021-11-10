@@ -2,23 +2,71 @@
 @{
     Layout = null;
 }
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>Đăng nhập</title>
+    <link rel="stylesheet" href="../../Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/AdminLTE.css">
+    <link rel="stylesheet" href="../../Content/skins/_all-skins.min.css">
     <link rel="stylesheet" type="text/css" href="../../Content/Site.css">
 </head>
 <body>
     <div class="login">
-        <form method="post" action="@Url.Action("Login", "Login")">
+        <form method="post" action="@Url.Action("Login", "Login")" id="frmLogin">
             <h2>TÂM ANH</h2>
             <br>
-            <input type="text" name="username" placeholder="Username" class="pl20">
-            <input type="password" name="password" placeholder="Password" class="pl20">
+            @if (ViewBag.focus != null) { 
+                @:<div class="form-group has-error"> 
+            } else{
+                @:<div class="form-group"> 
+            }
+                <input type="text" name="username" placeholder="Username" id="username" class="pl20 form-control" autofocus>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" id="password" class="pl20 form-control">
+            </div>
             <p class="notify text-center">@ViewBag.error</p>
             <input type="submit" value="Đăng nhập">
         </form>
     </div>
+    <script>
+        // ko nhap username
+        document.getElementById("username").focus();
 
+       window.onload = function () {
+           const username = document.getElementById("username");
+           const password = document.getElementById("password");
+           const myForm = document.getElementById("frmLogin");
+           const notify = document.getElementsByClassName("notify")[0];
+
+           myForm.addEventListener("submit", function (e) {
+               if (username.value.length == 0 && password.value.length == 0) {
+                   e.preventDefault();
+                   notify.innerText = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                   username.parentElement.classList.add("has-error");
+                   password.parentElement.classList.remove("has-error");
+                   username.focus();
+               }
+               else if (username.value.length == 0) {
+                   e.preventDefault();
+                   notify.innerText = "Vui lòng nhập username";
+                   //username.style.borderColor = "red";
+                   username.parentElement.classList.add("has-error");
+                   password.parentElement.classList.remove("has-error");
+                   username.focus();
+                   // focus*() ??
+               } else if (password.value.length == 0) {
+                   e.preventDefault();
+                   notify.innerText = "Vui lòng nhập password";
+                   username.parentElement.classList.remove("has-error");
+                   password.parentElement.classList.add("has-error");
+                   //password.style.borderColor = "red";
+                   password.focus();
+               }
+           });
+       }
+    </script>
+    <script src=""></script>
 </body>
 </html>

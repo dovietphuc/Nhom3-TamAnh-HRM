@@ -58,9 +58,15 @@ namespace TamAnh.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.tblkhenthuong_kyluat.Add(tblkhenthuong_kyluat);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tblkhenthuong_kyluat.KTKL_dThoiGianDuyet <= tblkhenthuong_kyluat.KTKL_dThoiGianLap)
+                    ViewBag.errDate = "Ngày duyệt phải lớn hơn ngày lập";
+                else
+                {
+                    db.tblkhenthuong_kyluat.Add(tblkhenthuong_kyluat);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
 
             return View(tblkhenthuong_kyluat);
@@ -90,9 +96,14 @@ namespace TamAnh.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblkhenthuong_kyluat).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tblkhenthuong_kyluat.KTKL_dThoiGianDuyet <= tblkhenthuong_kyluat.KTKL_dThoiGianLap)
+                    ViewBag.errDate = "Ngày duyệt phải lớn hơn ngày lập";
+                else
+                {
+                    db.Entry(tblkhenthuong_kyluat).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             return View(tblkhenthuong_kyluat);
         }

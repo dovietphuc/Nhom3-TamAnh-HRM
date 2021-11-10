@@ -20,39 +20,41 @@
             @Html.HiddenFor(model => model.PK_ChungChi_iMaCC)
 
             <div class="form-group">
-                <label class="control-label col-md-2"> Tên chứng chỉ </label>
+                <label class="control-label col-md-2"> Tên chứng chỉ <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ChungChi_sTenChungChi, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    @Html.EditorFor(model => model.ChungChi_sTenChungChi, new { htmlAttributes = new { @class = "form-control", id = "tenchungchi" } })
                     @Html.ValidationMessageFor(model => model.ChungChi_sTenChungChi, "", new { @class = "text-danger" })
+                    <div class="notify" id="notifyTencc"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2"> Ngày bắt đầu </label>
+                <label class="control-label col-md-2"> Ngày bắt đầu <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ChungChi_dNgayBD, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ChungChi_dNgayBD, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ChungChi_dNgayBD, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control", id = "ngaybd" } })
+                    <div class="notify" id="notifyNgaybd"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2"> Ngày kết thúc </label>
+                <label class="control-label col-md-2"> Ngày kết thúc <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ChungChi_dNgayKT, new { htmlAttributes = new {@type= "date", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ChungChi_dNgayKT, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ChungChi_dNgayKT, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control", id="ngaykt" } })
+                    <div class="notify" id="notifyNgaykt">@ViewBag.errDate</div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2"> Tệp đính kèm </label>
+                <label class="control-label col-md-2"> Tệp đính kèm <span class="note">*</span></label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ChungChi_sTepDinhKem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ChungChi_sTepDinhKem, new { htmlAttributes = new { @class = "form-control", id = "tepdinhkem" } })
                     @Html.ValidationMessageFor(model => model.ChungChi_sTepDinhKem, "", new { @class = "text-danger" })
+                    <div class="notify" id="notifyTepdinhkem"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2"> Nhân viên </label>
+                <label class="control-label col-md-2"> Nhân viên <span class="note">*</span></label>
                 <div class="col-md-10">
                     @Html.DropDownList("FK_NhanVien_iIDNhanVien", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.FK_NhanVien_iIDNhanVien, "", new { @class = "text-danger" })
@@ -61,7 +63,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Lưu lại" class="btn btn-default" />
+                    <input type="submit" value="Lưu lại" class="btn btn-default" id="submitFrm"/>
                 </div>
             </div>
         }
@@ -71,7 +73,120 @@
         </div>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        // change date
+        let ngaybd1 = document.getElementById("ngaybd").getAttribute("value");
+        if (ngaybd1[4] != "-") {
+            var sp = ngaybd1.split(" ")
+            var sp2 = sp[0].split("/");
+            var sp3 = sp[1].substr(0, 5).split(":");
+            if (sp[2] == "PM")
+                sp3[0] = paserInt(sp3[0]) + 12;
+            var v = sp2[2] + "-" + sp2[1] + "-" + sp2[0] + "T" + sp3[0] + ":" + sp3[1];
 
+            document.getElementById("ngaybd").setAttribute("value", v);
+        }
+
+
+        let ngaykt1 = document.getElementById("ngaykt").getAttribute("value");
+        if (ngaykt1[4] != "-") {
+            sp = ngaykt1.split(" ")
+            sp2 = sp[0].split("/");
+            sp3 = sp[1].substr(0, 5).split(":");
+            if (sp[2] == "PM")
+                sp3[0] = paserInt(sp3[0]) + 12;
+            v = sp2[2] + "-" + sp2[1] + "-" + sp2[0] + "T" + sp3[0] + ":" + sp3[1];
+
+            document.getElementById("ngaykt").setAttribute("value", v);
+        }
+
+        const tenchungchi = document.getElementById("tenchungchi");
+        const ngaybd = document.getElementById("ngaybd");
+        const ngaykt = document.getElementById("ngaykt");
+        const tepdinhkem = document.getElementById("tepdinhkem");
+
+        const notifyTencc = document.getElementById("notifyTencc");
+        const notifyNgaybd = document.getElementById("notifyNgaybd");
+        const notifyNgaykt = document.getElementById("notifyNgaykt");
+        const notifyTepdinhkem = document.getElementById("notifyTepdinhkem");
+
+        document.getElementById("submitFrm").onclick = function (e) {
+            let isValidData = true;
+            let isFocus = false;
+            resetNotify();
+            resetError();
+            if (tenchungchi.value.length == 0) {
+                notifyTencc.innerText = "Vui lòng nhập tên chứng chỉ";
+                tenchungchi.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tenchungchi.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (ngaybd.value.length == 0) {
+                notifyNgaybd.innerText = "Vui lòng nhập ngày bắt đầu";
+                ngaybd.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    ngaybd.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            // ngày ko hợp lệ
+            if (ngaybd.value.length > 16) {
+                notifyNgaybd.innerText = "Ngày bắt đầu không hợp lệ";
+                ngaybd.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    ngaybd.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (ngaykt.value.length == 0) {
+                notifyNgaykt.innerText = "Vui lòng nhập ngày kết thúc";
+                ngaykt.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    ngaykt.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (ngaykt.value.length > 16) {
+                notifyNgaykt.innerText = "Ngày kết thúc không hợp lệ";
+                ngaykt.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    ngaykt.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+            if (tepdinhkem.value.length == 0) {
+                notifyTepdinhkem.innerText = "Vui lòng nhập đường dẫn tệp đính kèm";
+                tepdinhkem.parentElement.classList.add("has-error");
+                if (!isFocus)
+                    tepdinhkem.focus();
+                isFocus = true;
+                isValidData = false;
+            }
+
+            if (isValidData)
+                return confirm("Bạn có muốn sửa bản ghi không?");
+            else
+                return false;
+        };
+    }
+
+    function resetNotify() {
+        let listNotify = document.getElementsByClassName("notify");
+        for (let i = 0; i < listNotify.length; ++i) {
+            listNotify[i].innerText = "";
+        }
+    }
+
+    function resetError() {
+        tenchungchi.parentElement.classList.remove("has-error");
+        ngaybd.parentElement.classList.remove("has-error");
+        ngaykt.parentElement.classList.remove("has-error");
+        tepdinhkem.parentElement.classList.remove("has-error");
+    }
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
