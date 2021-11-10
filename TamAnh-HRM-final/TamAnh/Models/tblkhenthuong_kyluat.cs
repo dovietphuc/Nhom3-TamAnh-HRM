@@ -11,7 +11,8 @@ namespace TamAnh.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblkhenthuong_kyluat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,11 @@ namespace TamAnh.Models
     
         public int PK_KTKL_iId { get; set; }
         public string KTKL_sTieuDe { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> KTKL_dThoiGianLap { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> KTKL_dThoiGianDuyet { get; set; }
         public Nullable<int> KTKL_iKinhPhi { get; set; }
         public string KTKL_sGhiChu { get; set; }

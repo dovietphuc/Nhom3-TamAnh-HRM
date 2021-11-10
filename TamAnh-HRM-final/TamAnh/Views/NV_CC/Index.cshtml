@@ -42,10 +42,10 @@
                         @Html.DisplayFor(modelItem => item.ChungChi_sTenChungChi)
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.ChungChi_dNgayBD)
+                        @item.ChungChi_dNgayBD.Value.ToString("dd/MM/yyyy")
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.ChungChi_dNgayKT)
+                        @item.ChungChi_dNgayKT.Value.ToString("dd/MM/yyyy")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ChungChi_sTepDinhKem)

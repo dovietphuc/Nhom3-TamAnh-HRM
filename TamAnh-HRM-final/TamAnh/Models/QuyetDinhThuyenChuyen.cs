@@ -93,11 +93,12 @@ namespace TamAnh.Models
                         + " ,[QĐCVTCV_dTrangThai]"
                         + " FROM tblquyetdinhchuyen_vtcongviec"
                   + " JOIN tblnhanvien as NV ON tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVien = NV.PK_iIdNhanVien"
+                  + " JOIN tblnhanvien as NVDUYET ON tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVienDuyet = NVDUYET.PK_iIdNhanVien"
+                  + " OR tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVienDuyet = 0"
                   + " JOIN tblvitricongviec AS VTCVCU ON tblquyetdinhchuyen_vtcongviec.FK_VTCV_iIdcu = VTCVCU.PK_VCCV_iMaVCCV"
                   + " JOIN tblvitricongviec AS VTCVMOI ON tblquyetdinhchuyen_vtcongviec.FK_VTCV_iIdmoi = VTCVMOI.PK_VCCV_iMaVCCV"
                   + " JOIN tblbophan AS BOPHANCU ON VTCVCU.FK_BoPhan_MaBP = BOPHANCU.PK_BoPhan_iMaBoPhan"
-                  + " JOIN tblbophan AS BOPHANMOI ON VTCVMOI.FK_BoPhan_MaBP = BOPHANMOI.PK_BoPhan_iMaBoPhan,"
-                  + " (SELECT * FROM tblnhanvien) as NVDUYET";
+                  + " JOIN tblbophan AS BOPHANMOI ON VTCVMOI.FK_BoPhan_MaBP = BOPHANMOI.PK_BoPhan_iMaBoPhan";
             else
                 sql = "SELECT DISTINCT [PK_QĐCVTCV_iId]"
                         + " ,[QĐCVTCV_dThoigianlap]"
@@ -116,11 +117,12 @@ namespace TamAnh.Models
                         + " ,[QĐCVTCV_dTrangThai]"
                         + " FROM tblquyetdinhchuyen_vtcongviec"
                   + " JOIN tblnhanvien as NV ON tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVien = NV.PK_iIdNhanVien"
+                  + " JOIN tblnhanvien as NVDUYET ON tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVienDuyet = NVDUYET.PK_iIdNhanVien"
+                  + " OR tblquyetdinhchuyen_vtcongviec.FK_NhanVien_iMaNhanVienDuyet = 0"
                   + " JOIN tblvitricongviec AS VTCVCU ON tblquyetdinhchuyen_vtcongviec.FK_VTCV_iIdcu = VTCVCU.PK_VCCV_iMaVCCV"
                   + " JOIN tblvitricongviec AS VTCVMOI ON tblquyetdinhchuyen_vtcongviec.FK_VTCV_iIdmoi = VTCVMOI.PK_VCCV_iMaVCCV"
                   + " JOIN tblbophan AS BOPHANCU ON VTCVCU.FK_BoPhan_MaBP = BOPHANCU.PK_BoPhan_iMaBoPhan"
-                  + " JOIN tblbophan AS BOPHANMOI ON VTCVMOI.FK_BoPhan_MaBP = BOPHANMOI.PK_BoPhan_iMaBoPhan,"
-                  + " (SELECT * FROM tblnhanvien) as NVDUYET WHERE [PK_QĐCVTCV_iId] = " + ID;
+                  + " JOIN tblbophan AS BOPHANMOI ON VTCVMOI.FK_BoPhan_MaBP = BOPHANMOI.PK_BoPhan_iMaBoPhan WHERE [PK_QĐCVTCV_iId] = " + ID;
 
             List<QuyetDinhThuyenChuyen> list = new List<QuyetDinhThuyenChuyen>();
 

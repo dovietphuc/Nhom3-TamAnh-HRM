@@ -107,12 +107,19 @@ namespace TamAnh.Controllers
                 {
                     // TODO: Add update logic here
                     ListNhanVien listNhanVien = new ListNhanVien();
-                    listNhanVien.update(nhanVien);
-                    return RedirectToAction("Index");
+                    NhanVien old = listNhanVien.get(nhanVien.ID).FirstOrDefault();
+                    nhanVien.iMaVTCV = old.iMaVTCV;
+                    if (listNhanVien.update(nhanVien))
+                    {
+                        return RedirectToAction("Index");
+                    } else
+                    {
+                        return View(nhanVien);
+                    }
                 }
                 catch
                 {
-                    return View();
+                    return View(nhanVien);
                 }
             }
             else

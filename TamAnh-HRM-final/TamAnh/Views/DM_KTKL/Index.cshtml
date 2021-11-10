@@ -42,10 +42,10 @@
                         @Html.DisplayFor(modelItem => item.KTKL_sTieuDe)
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.KTKL_dThoiGianLap)
+                        @item.KTKL_dThoiGianLap.Value.ToString("dd/MM/yyyy")
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.KTKL_dThoiGianDuyet)
+                        @item.KTKL_dThoiGianDuyet.Value.ToString("dd/MM/yyyy")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.KTKL_iKinhPhi)
